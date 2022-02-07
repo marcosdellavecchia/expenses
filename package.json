@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "17.0.2",
-    "react-native": "0.67.2"
+    "react-native": "0.67.2",
+    "react-native-navigation": "^7.24.3-hotfix.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
