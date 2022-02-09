@@ -11,28 +11,23 @@ import RegisterScreen from '../screens/RegisterScreen';
 import LoginScreen from '../screens/LoginScreen';
 
 export const registerScreens = (): void => {
-  registerRootScreen('Loading', LoadingScreen);
-  registerRootScreen('Home', HomeScreen);
-  registerRootScreen('Register', RegisterScreen);
-  registerRootScreen('Login', LoginScreen);
-};
-
-export const registerRootScreen = (
-  name: string,
-  Component: NavigationFunctionComponent,
-): void => {
-  Navigation.registerComponent(
-    name,
-    () => (props: NavigationComponentProps) => <Component {...props} />,
-    () => Component,
-  );
+  Navigation.registerComponent('Loading', () => LoadingScreen);
+  Navigation.registerComponent('Home', () => HomeScreen);
+  Navigation.registerComponent('Login', () => LoginScreen);
+  Navigation.registerComponent('Register', () => RegisterScreen);
 };
 
 export const startApp = (): void => {
   Navigation.setRoot({
     root: {
-      component: {
-        name: 'Home',
+      stack: {
+        children: [
+          {
+            component: {
+              name: 'Home',
+            },
+          },
+        ],
       },
     },
   });

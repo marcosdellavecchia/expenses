@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import { NavigationFunctionComponent } from 'react-native-navigation';
 
-const HomeScreen: NavigationFunctionComponent = () => {
+import { pushScreen } from '../navigation';
+
+const HomeScreen: NavigationFunctionComponent = ({ componentId }) => {
   return (
     <View style={styles.screen}>
       <Text>Home screen</Text>
