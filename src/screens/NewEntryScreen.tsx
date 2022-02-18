@@ -1,13 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { NavigationFunctionComponent } from 'react-native-navigation';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  Navigation,
+  NavigationFunctionComponent,
+} from 'react-native-navigation';
 
 import { Colors } from '../theme/colors';
 
-const NewEntryScreen: NavigationFunctionComponent = () => {
+const NewEntryScreen: NavigationFunctionComponent = ({ componentId }) => {
+  const handleDismissModal = () => Navigation.dismissModal(componentId);
+
   return (
     <View style={styles.screen}>
-      <Text>New Entry Screen</Text>
+      <Text style={styles.h1}>New Entry Screen</Text>
+      <TouchableOpacity onPress={handleDismissModal}>
+        <Text style={styles.body1}>Dismiss Modal</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -19,6 +27,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: `${Colors.BLACK}`,
   },
+  h1: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: `${Colors.GRAY}`,
+  },
+  body1: {
+    fontSize: 16,
+    color: `${Colors.DARK_GRAY}`,
+  },
 });
 
 export default NewEntryScreen;
@@ -26,7 +43,7 @@ export default NewEntryScreen;
 NewEntryScreen.options = {
   topBar: {
     title: {
-      text: 'Agregar gasto',
+      text: 'Cargar gasto',
       color: `${Colors.WHITE}`,
     },
     background: {

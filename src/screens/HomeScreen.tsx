@@ -1,22 +1,47 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
 import { NavigationFunctionComponent } from 'react-native-navigation';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 import EmptyBoxSvg from '../assets/empty-box.svg';
-import { RoundButton } from '../components/buttons';
+import PlusButtonSvg from '../assets/plus-button.svg';
 import { Spacer } from '../components/Spacer';
 import { Colors } from '../theme/colors';
-import { pushScreen } from '../navigation';
+import { showModal } from '../navigation';
+
+/*
+ * Constants
+ */
+
+const GESTURE_RECOGNIZER_CONFIG = {
+  velocityThreshold: 0.3,
+  directionalOffsetThreshold: 80,
+};
+
+/*
+ * Home Screen Component
+ */
 
 const HomeScreen: NavigationFunctionComponent = ({ componentId }) => {
+  const handleNewEntryNavigation = () => showModal('NewEntry');
+
   return (
-    <View style={styles.screen}>
+    <GestureRecognizer
+      onSwipeDown={handleNewEntryNavigation}
+      config={GESTURE_RECOGNIZER_CONFIG}
+      style={styles.screen}>
       <View style={styles.roundButtonContainer}>
-        <RoundButton
-          label="+"
+        <TouchableOpacity
           accessibilityLabel="Add new entry"
-          onPress={() => pushScreen(componentId, 'NewEntry')}
-        />
+          onPress={handleNewEntryNavigation}>
+          <PlusButtonSvg width={40} height={40} color={Colors.WHITE} />
+        </TouchableOpacity>
       </View>
       <EmptyBoxSvg width={125} height={125} color={Colors.DARK_GRAY} />
       <Spacer />
@@ -26,7 +51,7 @@ const HomeScreen: NavigationFunctionComponent = ({ componentId }) => {
         Podés presionar el botón o deslizar hacia abajo
       </Text>
       <Text style={styles.body1}></Text>
-    </View>
+    </GestureRecognizer>
   );
 };
 

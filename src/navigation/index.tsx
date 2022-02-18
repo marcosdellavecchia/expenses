@@ -40,6 +40,28 @@ export const pushScreen = (componentId: string, screenName: string): void => {
   });
 };
 
+export const showModal = (screenName: string) => {
+  Navigation.showModal({
+    stack: {
+      children: [
+        {
+          component: {
+            name: screenName,
+            options: {
+              topBar: {
+                visible: true,
+                title: {
+                  alignment: 'center',
+                },
+              },
+            },
+          },
+        },
+      ],
+    },
+  });
+};
+
 export const setDefaultNavigationOptions = (): void => {
   Navigation.setDefaultOptions({
     statusBar: {
