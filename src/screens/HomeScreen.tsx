@@ -6,6 +6,7 @@ import EmptyBoxSvg from '../assets/empty-box.svg';
 import { RoundButton } from '../components/buttons';
 import { Spacer } from '../components/Spacer';
 import { Colors } from '../theme/colors';
+import { pushScreen } from '../navigation';
 
 const HomeScreen: NavigationFunctionComponent = ({ componentId }) => {
   return (
@@ -14,12 +15,12 @@ const HomeScreen: NavigationFunctionComponent = ({ componentId }) => {
         <RoundButton
           label="+"
           accessibilityLabel="Add new entry"
-          onPress={() => {}}
+          onPress={() => pushScreen(componentId, 'NewEntry')}
         />
       </View>
       <EmptyBoxSvg width={125} height={125} color={Colors.DARK_GRAY} />
       <Spacer />
-      <Text style={styles.h1}> Agregá tu primera entrada</Text>
+      <Text style={styles.h1}>Cargá tu primer gasto</Text>
       <Spacer size="xs" />
       <Text style={styles.body1}>
         Podés presionar el botón o deslizar hacia abajo

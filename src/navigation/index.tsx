@@ -1,12 +1,13 @@
-import React from 'react';
 import { Navigation } from 'react-native-navigation';
 
 import LoadingScreen from '../screens/LoadingScreen';
 import HomeScreen from '../screens/HomeScreen';
+import NewEntryScreen from '../screens/NewEntryScreen';
 
 export const registerScreens = (): void => {
   Navigation.registerComponent('Loading', () => LoadingScreen);
   Navigation.registerComponent('Home', () => HomeScreen);
+  Navigation.registerComponent('NewEntry', () => NewEntryScreen);
 };
 
 export const startApp = (): void => {
@@ -25,11 +26,7 @@ export const startApp = (): void => {
   });
 };
 
-export const pushScreen = (
-  componentId: string,
-  screenName: string,
-  text: string,
-): void => {
+export const pushScreen = (componentId: string, screenName: string): void => {
   Navigation.push(componentId, {
     component: {
       name: screenName,
@@ -37,7 +34,6 @@ export const pushScreen = (
         topBar: {
           visible: true,
           animate: true,
-          title: { text },
         },
       },
     },
