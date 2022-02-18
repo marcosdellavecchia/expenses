@@ -7,48 +7,28 @@ import { Colors } from '../theme/colors';
  * Types
  */
 
-type PrimaryButtonProps = {
+type ButtonProps = {
   label: string;
   accessibilityLabel: string;
   onPress: () => void;
 };
 
 /*
- * Primary Button
+ * Buttons
  */
 
-export const PrimaryButton: FunctionComponent<PrimaryButtonProps> = ({
+export const RoundButton: FunctionComponent<ButtonProps> = ({
   label,
   accessibilityLabel,
   onPress,
 }) => {
   return (
     <TouchableOpacity
-      style={styles.primaryButtonTouchable}
+      style={styles.roundButtonTouchable}
       activeOpacity={0.5}
       accessibilityLabel={accessibilityLabel}
       onPress={onPress}>
-      <Text style={styles.primaryButtonText}> {label.toUpperCase()}</Text>
-    </TouchableOpacity>
-  );
-};
-
-/*
- * Secondary Button
- */
-
-export const SecondaryButton: FunctionComponent<PrimaryButtonProps> = ({
-  label,
-  accessibilityLabel,
-  onPress,
-}) => {
-  return (
-    <TouchableOpacity
-      style={styles.secondaryButtonTouchable}
-      activeOpacity={0.5}
-      accessibilityLabel={accessibilityLabel}
-      onPress={onPress}>
-      <Text style={styles.secondaryButtonText}> {label.toUpperCase()}</Text>
+      <Text style={styles.roundButtonText}> {label.toUpperCase()}</Text>
     </TouchableOpacity>
   );
 };
@@ -58,38 +38,20 @@ export const SecondaryButton: FunctionComponent<PrimaryButtonProps> = ({
  */
 
 const styles = StyleSheet.create({
-  primaryButtonTouchable: {
-    flexDirection: 'row',
+  roundButtonTouchable: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: `${Colors.PRIMARY}`,
-    padding: 10,
-    margin: 8,
-    borderRadius: 5,
-    elevation: 3,
-    width: '90%',
-    height: 50,
+    backgroundColor: `${Colors.WHITE}`,
+    margin: 10,
+    borderRadius: 50,
+    width: 35,
+    height: 35,
+    paddingRight: 4,
+    paddingBottom: 2,
   },
-  secondaryButtonTouchable: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 10,
-    margin: 8,
-    elevation: 3,
-    width: '90%',
-    height: 50,
-  },
-  primaryButtonText: {
-    fontSize: 16,
-    letterSpacing: 0.5,
+  roundButtonText: {
+    fontSize: 26,
     fontWeight: 'bold',
-    color: `${Colors.BACKGROUND}`,
-  },
-  secondaryButtonText: {
-    fontSize: 16,
-    letterSpacing: 0.5,
-    fontWeight: 'bold',
-    color: `${Colors.PRIMARY}`,
+    color: `${Colors.BLACK}`,
   },
 });

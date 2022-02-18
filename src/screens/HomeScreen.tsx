@@ -1,13 +1,30 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { NavigationFunctionComponent } from 'react-native-navigation';
 
-import { pushScreen } from '../navigation';
+import EmptyBoxSvg from '../assets/empty-box.svg';
+import { RoundButton } from '../components/buttons';
+import { Spacer } from '../components/Spacer';
+import { Colors } from '../theme/colors';
 
 const HomeScreen: NavigationFunctionComponent = ({ componentId }) => {
   return (
     <View style={styles.screen}>
-      <Text>Home screen</Text>
+      <View style={styles.roundButtonContainer}>
+        <RoundButton
+          label="+"
+          accessibilityLabel="Add new entry"
+          onPress={() => {}}
+        />
+      </View>
+      <EmptyBoxSvg width={125} height={125} color={Colors.DARK_GRAY} />
+      <Spacer />
+      <Text style={styles.h1}> Agregá tu primera entrada</Text>
+      <Spacer size="xs" />
+      <Text style={styles.body1}>
+        Podés presionar el botón o deslizar hacia abajo
+      </Text>
+      <Text style={styles.body1}></Text>
     </View>
   );
 };
@@ -17,6 +34,21 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: `${Colors.BLACK}`,
+  },
+  h1: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    color: `${Colors.GRAY}`,
+  },
+  body1: {
+    fontSize: 16,
+    color: `${Colors.DARK_GRAY}`,
+  },
+  roundButtonContainer: {
+    position: 'absolute',
+    top: '5%',
+    right: '5%',
   },
 });
 

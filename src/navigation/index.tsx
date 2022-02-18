@@ -1,20 +1,12 @@
 import React from 'react';
-import {
-  Navigation,
-  NavigationComponentProps,
-  NavigationFunctionComponent,
-} from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation';
 
 import LoadingScreen from '../screens/LoadingScreen';
 import HomeScreen from '../screens/HomeScreen';
-import RegisterScreen from '../screens/RegisterScreen';
-import LoginScreen from '../screens/LoginScreen';
 
 export const registerScreens = (): void => {
   Navigation.registerComponent('Loading', () => LoadingScreen);
   Navigation.registerComponent('Home', () => HomeScreen);
-  Navigation.registerComponent('Login', () => LoginScreen);
-  Navigation.registerComponent('Register', () => RegisterScreen);
 };
 
 export const startApp = (): void => {
