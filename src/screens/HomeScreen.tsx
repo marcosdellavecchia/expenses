@@ -1,7 +1,14 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import { NavigationFunctionComponent } from 'react-native-navigation';
 import GestureRecognizer from 'react-native-swipe-gestures';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import EmptyBoxSvg from '../assets/empty-box.svg';
 import PlusButtonSvg from '../assets/plus-button.svg';
@@ -19,12 +26,38 @@ const GESTURE_RECOGNIZER_CONFIG = {
 };
 
 /*
+ * Types
+ */
+
+interface HomeScreenProps {
+  componentId: string;
+}
+
+/*
  * Home Screen Component
  */
 
-const HomeScreen: NavigationFunctionComponent = ({ componentId }) => {
+const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
+  componentId,
+}) => {
+  const [expenses, setExpenses] = useState([]);
+
+  useEffect(() => {
+    getExpenses();
+  }, [expenses]);
+
+  const getExpenses = () => {
+    AsyncStorage.getItem('VALUESX').then(expenses => {
+      setExpenses(JSON.parse(expenses || ''));
+    });
+  };
+
   const handleNewEntryNavigation = () =>
     pushScreenVertical(componentId, 'NewEntry');
+
+  const renderItem = ({ item, index }: any) => (
+    <Text style={styles.body1}>{item}</Text>
+  );
 
   return (
     <GestureRecognizer
@@ -38,14 +71,24 @@ const HomeScreen: NavigationFunctionComponent = ({ componentId }) => {
           <PlusButtonSvg width={40} height={40} color={Colors.WHITE} />
         </TouchableOpacity>
       </View>
-      <EmptyBoxSvg width={125} height={125} color={Colors.DARK_GRAY} />
-      <Spacer />
-      <Text style={styles.h1}>Cargá tu primer gasto</Text>
-      <Spacer size="xs" />
-      <Text style={styles.body1}>
-        Podés presionar el botón o deslizar hacia abajo
-      </Text>
-      <Text style={styles.body1}></Text>
+      {expenses.length === 0 ? (
+        <>
+          <EmptyBoxSvg width={125} height={125} color={Colors.DARK_GRAY} />
+          <Spacer />
+          <Text style={styles.h1}>Cargá tu primer gasto</Text>
+          <Spacer size="xs" />
+          <Text style={styles.body1}>
+            Podés presionar el botón o deslizar hacia abajo
+          </Text>
+        </>
+      ) : (
+        <FlatList
+          data={expenses}
+          renderItem={renderItem}
+          keyExtractor={(item, index) => index.toString()}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
     </GestureRecognizer>
   );
 };

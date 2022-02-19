@@ -4,24 +4,46 @@ import {
   Navigation,
   NavigationFunctionComponent,
 } from 'react-native-navigation';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { NumberInput } from '../components/NumberInput';
 import { Colors } from '../theme/colors';
 import { validateNumbers } from '../utils';
 
-const NewEntryScreen: NavigationFunctionComponent = ({ componentId }) => {
-  const [value, setValue] = useState(validateNumbers(''));
+/*
+ * Types
+ */
+
+interface NewEntryScreenProps {
+  componentId: string;
+}
+
+/*
+ * New Entry Screen
+ */
+
+const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
+  componentId,
+}) => {
+  const [value, setValue] = useState('');
 
   const onValueChange = (text: string) => {
     setValue(validateNumbers(text));
   };
 
+  const saveValue = async () => {
+    const expenses = await AsyncStorage.getItem('VALUESX');
+    const n = expenses ? JSON.parse(expenses) : [];
+    n.push(value);
+    await AsyncStorage.setItem('VALUESX', JSON.stringify(n)).then(() =>
+      Navigation.pop(componentId),
+    );
+  };
+
   return (
     <View style={styles.screen}>
       <NumberInput value={value} onValueChange={onValueChange} />
-      <TouchableOpacity
-        style={styles.saveContainer}
-        onPress={() => Navigation.pop(componentId)}>
+      <TouchableOpacity style={styles.saveContainer} onPress={saveValue}>
         <Text style={styles.saveText}>Guardar</Text>
       </TouchableOpacity>
     </View>

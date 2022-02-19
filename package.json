@@ -10,11 +10,13 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.16.1",
     "react": "17.0.2",
     "react-native": "0.67.2",
     "react-native-navigation": "^7.24.3-hotfix.1",
     "react-native-svg": "^12.1.1",
-    "react-native-swipe-gestures": "^1.0.5"
+    "react-native-swipe-gestures": "^1.0.5",
+    "react-native-webview": "^11.17.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

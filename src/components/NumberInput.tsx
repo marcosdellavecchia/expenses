@@ -20,6 +20,7 @@ export const NumberInput: FunctionComponent<NumberInputProps> = ({
         placeholder="$0"
         value={`${value}`}
         onChangeText={onValueChange}
+        maxLength={8}
         autoFocus
       />
     </View>
