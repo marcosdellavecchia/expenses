@@ -1,42 +1,32 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import {
   Navigation,
   NavigationFunctionComponent,
 } from 'react-native-navigation';
 
+import { NumberInput } from '../components/NumberInput';
 import { Colors } from '../theme/colors';
+import { validateNumbers } from '../utils';
 
 const NewEntryScreen: NavigationFunctionComponent = ({ componentId }) => {
-  const handleDismissModal = () => Navigation.dismissModal(componentId);
+  const [value, setValue] = useState(validateNumbers(''));
+
+  const onValueChange = (text: string) => {
+    setValue(validateNumbers(text));
+  };
 
   return (
     <View style={styles.screen}>
-      <Text style={styles.h1}>New Entry Screen</Text>
-      <TouchableOpacity onPress={handleDismissModal}>
-        <Text style={styles.body1}>Dismiss Modal</Text>
+      <NumberInput value={value} onValueChange={onValueChange} />
+      <TouchableOpacity
+        style={styles.saveContainer}
+        onPress={() => Navigation.pop(componentId)}>
+        <Text style={styles.saveText}>Guardar</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: `${Colors.BLACK}`,
-  },
-  h1: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: `${Colors.GRAY}`,
-  },
-  body1: {
-    fontSize: 16,
-    color: `${Colors.DARK_GRAY}`,
-  },
-});
 
 export default NewEntryScreen;
 
@@ -51,3 +41,19 @@ NewEntryScreen.options = {
     },
   },
 };
+
+const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: `${Colors.BLACK}`,
+  },
+  saveContainer: {
+    paddingTop: 30,
+  },
+  saveText: {
+    fontSize: 16,
+    color: `${Colors.GRAY}`,
+  },
+});

@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { NavigationFunctionComponent } from 'react-native-navigation';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
@@ -13,7 +7,7 @@ import EmptyBoxSvg from '../assets/empty-box.svg';
 import PlusButtonSvg from '../assets/plus-button.svg';
 import { Spacer } from '../components/Spacer';
 import { Colors } from '../theme/colors';
-import { showModal } from '../navigation';
+import { pushScreenVertical } from '../navigation';
 
 /*
  * Constants
@@ -29,7 +23,8 @@ const GESTURE_RECOGNIZER_CONFIG = {
  */
 
 const HomeScreen: NavigationFunctionComponent = ({ componentId }) => {
-  const handleNewEntryNavigation = () => showModal('NewEntry');
+  const handleNewEntryNavigation = () =>
+    pushScreenVertical(componentId, 'NewEntry');
 
   return (
     <GestureRecognizer
