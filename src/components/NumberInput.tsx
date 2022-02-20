@@ -6,11 +6,13 @@ import { Colors } from '../theme/colors';
 interface NumberInputProps {
   value: string;
   onValueChange: (text: string) => void;
+  onSubmitEditing: () => void;
 }
 
 export const NumberInput: FunctionComponent<NumberInputProps> = ({
   value,
   onValueChange,
+  onSubmitEditing,
 }) => {
   return (
     <View style={styles.screen}>
@@ -21,6 +23,7 @@ export const NumberInput: FunctionComponent<NumberInputProps> = ({
         value={`${value}`}
         onChangeText={onValueChange}
         maxLength={8}
+        onSubmitEditing={onSubmitEditing}
         autoFocus
       />
     </View>

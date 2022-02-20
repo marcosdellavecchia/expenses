@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   FlatList,
+  Dimensions,
 } from 'react-native';
 import { NavigationFunctionComponent } from 'react-native-navigation';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks';
 
-import EmptyBoxSvg from '../assets/empty-box.svg';
 import PlusButtonSvg from '../assets/plus-button.svg';
-import { Spacer } from '../components/Spacer';
 import { Colors } from '../theme/colors';
-import { pushScreenVertical } from '../navigation';
+import { pushScreenVertically } from '../navigation';
+import { EmptyMessage } from '../components/EmptyMessage';
+import { CurrentBalance } from '../components/CurrentBalance';
 
 /*
  * Constants
@@ -24,6 +26,8 @@ const GESTURE_RECOGNIZER_CONFIG = {
   velocityThreshold: 0.3,
   directionalOffsetThreshold: 80,
 };
+
+const SCREEN_WIDTH = Dimensions.get('screen').width;
 
 /*
  * Types
@@ -40,24 +44,27 @@ interface HomeScreenProps {
 const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
   componentId,
 }) => {
+  useNavigationComponentDidAppear(() => {
+    getExpenses();
+    console.log(expenses);
+  });
+
   const [expenses, setExpenses] = useState([]);
 
-  useEffect(() => {
-    getExpenses();
-  }, [expenses]);
-
   const getExpenses = () => {
-    AsyncStorage.getItem('VALUESX').then(expenses => {
+    AsyncStorage.getItem('VALUESX4').then(expenses => {
       setExpenses(JSON.parse(expenses || ''));
     });
   };
 
-  const handleNewEntryNavigation = () =>
-    pushScreenVertical(componentId, 'NewEntry');
-
-  const renderItem = ({ item, index }: any) => (
-    <Text style={styles.body1}>{item}</Text>
+  const renderExpenses = ({ item, index }: any) => (
+    <View style={styles.listTextContainer}>
+      <Text style={styles.listText}>{item}</Text>
+    </View>
   );
+
+  const handleNewEntryNavigation = () =>
+    pushScreenVertically(componentId, 'NewEntry');
 
   return (
     <GestureRecognizer
@@ -72,22 +79,18 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
         </TouchableOpacity>
       </View>
       {expenses.length === 0 ? (
-        <>
-          <EmptyBoxSvg width={125} height={125} color={Colors.DARK_GRAY} />
-          <Spacer />
-          <Text style={styles.h1}>Cargá tu primer gasto</Text>
-          <Spacer size="xs" />
-          <Text style={styles.body1}>
-            Podés presionar el botón o deslizar hacia abajo
-          </Text>
-        </>
+        <EmptyMessage />
       ) : (
-        <FlatList
-          data={expenses}
-          renderItem={renderItem}
-          keyExtractor={(item, index) => index.toString()}
-          showsVerticalScrollIndicator={false}
-        />
+        <>
+          <CurrentBalance />
+          <View style={styles.flatListContainer}>
+            <FlatList
+              data={expenses.reverse()}
+              renderItem={renderExpenses}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </View>
+        </>
       )}
     </GestureRecognizer>
   );
@@ -100,19 +103,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: `${Colors.BLACK}`,
   },
-  h1: {
-    fontSize: 26,
-    fontWeight: 'bold',
-    color: `${Colors.GRAY}`,
-  },
-  body1: {
-    fontSize: 16,
-    color: `${Colors.DARK_GRAY}`,
-  },
   roundButtonContainer: {
     position: 'absolute',
     top: '5%',
     right: '5%',
+  },
+  flatListContainer: {
+    height: '50%',
+    width: SCREEN_WIDTH * 0.9,
+  },
+  listTextContainer: {
+    borderBottomWidth: 0.5,
+    borderColor: `${Colors.DARK_GRAY}`,
+    width: SCREEN_WIDTH * 0.9,
+  },
+  listText: {
+    fontSize: 16,
+    paddingTop: 5,
+    paddingBottom: 5,
+    color: `${Colors.WHITE}`,
   },
 });
 

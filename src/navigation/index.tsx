@@ -1,13 +1,20 @@
 import { Navigation } from 'react-native-navigation';
+import { withNavigationProvider } from 'react-native-navigation-hooks';
 
 import LoadingScreen from '../screens/LoadingScreen';
 import HomeScreen from '../screens/HomeScreen';
 import NewEntryScreen from '../screens/NewEntryScreen';
 
 export const registerScreens = (): void => {
-  Navigation.registerComponent('Loading', () => LoadingScreen);
-  Navigation.registerComponent('Home', () => HomeScreen);
-  Navigation.registerComponent('NewEntry', () => NewEntryScreen);
+  Navigation.registerComponent('Loading', () => {
+    return withNavigationProvider(LoadingScreen);
+  });
+  Navigation.registerComponent('Home', () => {
+    return withNavigationProvider(HomeScreen);
+  });
+  Navigation.registerComponent('NewEntry', () => {
+    return withNavigationProvider(NewEntryScreen);
+  });
 };
 
 export const startApp = (): void => {
@@ -26,7 +33,7 @@ export const startApp = (): void => {
   });
 };
 
-export const pushScreenVertical = (
+export const pushScreenVertically = (
   componentId: string,
   screenName: string,
 ): void => {

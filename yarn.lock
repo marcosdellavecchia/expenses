@@ -3840,7 +3840,7 @@ hermes-profile-transformer@^0.0.6:
   dependencies:
     source-map "^0.7.3"
 
-hoist-non-react-statics@3.x.x:
+hoist-non-react-statics@3.3.2, hoist-non-react-statics@3.x.x:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -6041,6 +6041,13 @@ react-native-codegen@^0.0.8:
     flow-parser "^0.121.0"
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
+
+react-native-navigation-hooks@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-navigation-hooks/-/react-native-navigation-hooks-6.3.0.tgz#468e1f80065fd5e8d0ad0a23671656ee06ba21cf"
+  integrity sha512-fvKYYIEIHROnqLDYVZtyojXNeJ/h0LBx4OFBBtPxJpVM2wvVj4vFO0ABU16i0SGwStGs32iLKdcgkB5qgAv7kA==
+  dependencies:
+    hoist-non-react-statics "3.3.2"
 
 react-native-navigation@^7.24.3-hotfix.1:
   version "7.24.3-hotfix.1"

@@ -32,17 +32,21 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   };
 
   const saveValue = async () => {
-    const expenses = await AsyncStorage.getItem('VALUESX');
+    const expenses = await AsyncStorage.getItem('VALUESX4');
     const n = expenses ? JSON.parse(expenses) : [];
-    n.push(value);
-    await AsyncStorage.setItem('VALUESX', JSON.stringify(n)).then(() =>
+    n.push(['Gasto ', `$${value}`]);
+    await AsyncStorage.setItem('VALUESX4', JSON.stringify(n)).then(() =>
       Navigation.pop(componentId),
     );
   };
 
   return (
     <View style={styles.screen}>
-      <NumberInput value={value} onValueChange={onValueChange} />
+      <NumberInput
+        value={value}
+        onValueChange={onValueChange}
+        onSubmitEditing={saveValue}
+      />
       <TouchableOpacity style={styles.saveContainer} onPress={saveValue}>
         <Text style={styles.saveText}>Guardar</Text>
       </TouchableOpacity>
