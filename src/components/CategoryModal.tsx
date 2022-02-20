@@ -26,6 +26,7 @@ interface CategoryModalProps {
   isVisible: boolean;
   toggleModal: () => void;
   categories: string[];
+  onCategoryChange: (selectedCategory: string) => void;
 }
 
 /*
@@ -36,18 +37,22 @@ export const CategoryModal: FunctionComponent<CategoryModalProps> = ({
   isVisible,
   toggleModal,
   categories,
+  onCategoryChange,
 }) => {
+  const handleCategoryChange = (category: string) => {
+    onCategoryChange(category);
+    toggleModal();
+  };
+
   return (
     <View>
-      <Modal
-        isVisible={isVisible}
-        deviceWidth={SCREEN_WIDTH}
-        deviceHeight={SCREEN_HEIGHT}
-        onBackdropPress={toggleModal}>
+      <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
         <View style={styles.screen}>
           <ScrollView style={styles.categoryScrollView}>
             {categories.map(category => (
-              <Text style={styles.categoryItemsText}> {category} </Text>
+              <TouchableOpacity onPress={() => handleCategoryChange(category)}>
+                <Text style={styles.categoryItemsText}> {category} </Text>
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>

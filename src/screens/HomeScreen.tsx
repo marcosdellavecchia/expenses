@@ -51,7 +51,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
   const [expenses, setExpenses] = useState([]);
 
   const getExpenses = () => {
-    AsyncStorage.getItem('VALUESX4').then(expenses => {
+    AsyncStorage.getItem('VALUESX6').then(expenses => {
       setExpenses(JSON.parse(expenses || ''));
     });
   };
@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
   },
   listText: {
     fontSize: 16,
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingTop: 8,
+    paddingBottom: 8,
     color: `${Colors.WHITE}`,
   },
 });

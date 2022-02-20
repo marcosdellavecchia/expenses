@@ -18,12 +18,14 @@ export const NumberInput: FunctionComponent<NumberInputProps> = ({
     <View style={styles.screen}>
       <TextInput
         style={styles.input}
-        keyboardType="number-pad"
-        placeholder="$0"
+        keyboardType="decimal-pad"
+        placeholder="$0,00"
+        placeholderTextColor={Colors.ALMOST_BLACK}
         value={`${value}`}
         onChangeText={onValueChange}
         maxLength={8}
         onSubmitEditing={onSubmitEditing}
+        textAlign="center"
         autoFocus
       />
     </View>

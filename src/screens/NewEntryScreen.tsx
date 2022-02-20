@@ -8,14 +8,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { NumberInput } from '../components/NumberInput';
 import { Colors } from '../theme/colors';
-import { validateNumbers } from '../utils';
+import { validateNumbers, removeLeadingZeros } from '../utils';
 import { CategoryModal } from '../components/CategoryModal';
+import { Spacer } from '../components/Spacer';
 
 /*
  * Constants
  */
 
 const expensesCategories = [
+  '💸 Gastos varios',
   '🥑 Alimentos',
   '👕 Ropa',
   '💊 Salud',
@@ -23,7 +25,6 @@ const expensesCategories = [
   '📚 Educación',
   '🍿 Entretenimiento',
   '🍸 Salidas',
-  '🤷 Otro',
 ];
 
 /*
@@ -42,43 +43,59 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   componentId,
 }) => {
   const [value, setValue] = useState('');
-  const [category, setCategory] = useState('Gasto');
+  const [category, setCategory] = useState(expensesCategories[0]);
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  const onValueChange = (text: string) => {
-    setValue(validateNumbers(text));
+  const handleCategoryChange = (selectedCategory: string) => {
+    setCategory(selectedCategory);
+  };
+
+  const onInputValueChange = (text: string) => {
+    const sanitizedValue = validateNumbers(text);
+    const sanitizedValueWithoutZeros = removeLeadingZeros(sanitizedValue);
+    setValue(sanitizedValueWithoutZeros);
   };
 
   const saveValue = async () => {
-    const expenses = await AsyncStorage.getItem('VALUESX4');
+    const expenses = await AsyncStorage.getItem('VALUESX6');
     const n = expenses ? JSON.parse(expenses) : [];
     n.push([`${category} $${value}`]);
-    await AsyncStorage.setItem('VALUESX4', JSON.stringify(n)).then(() =>
+    await AsyncStorage.setItem('VALUESX6', JSON.stringify(n)).then(() =>
       Navigation.pop(componentId),
     );
+  };
+
+  const handleSubmit = () => {
+    if (value.length === 0 || Number(value) == 0) {
+      return;
+    }
+    saveValue();
   };
 
   return (
     <View style={styles.screen}>
       <NumberInput
         value={value}
-        onValueChange={onValueChange}
+        onValueChange={onInputValueChange}
         onSubmitEditing={saveValue}
       />
-      <TouchableOpacity style={styles.saveContainer} onPress={toggleModal}>
-        <Text style={styles.saveText}>Elegir categoría</Text>
+      <Spacer size="l" />
+      <TouchableOpacity onPress={toggleModal}>
+        <Text style={styles.categoryText}>{category}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.saveContainer} onPress={saveValue}>
+      <Spacer />
+      <TouchableOpacity style={styles.saveContainer} onPress={handleSubmit}>
         <Text style={styles.saveText}>Guardar</Text>
       </TouchableOpacity>
       <CategoryModal
         isVisible={isModalVisible}
         toggleModal={toggleModal}
         categories={expensesCategories}
+        onCategoryChange={handleCategoryChange}
       />
     </View>
   );
@@ -106,9 +123,15 @@ const styles = StyleSheet.create({
     backgroundColor: `${Colors.BLACK}`,
   },
   saveContainer: {
-    paddingTop: 30,
+    padding: 10,
+    borderRadius: 50,
+    backgroundColor: `${Colors.DARK_GRAY}`,
   },
   saveText: {
+    fontSize: 16,
+    color: `${Colors.ALMOST_BLACK}`,
+  },
+  categoryText: {
     fontSize: 16,
     color: `${Colors.GRAY}`,
   },
