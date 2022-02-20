@@ -9,6 +9,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NumberInput } from '../components/NumberInput';
 import { Colors } from '../theme/colors';
 import { validateNumbers } from '../utils';
+import { CategoryModal } from '../components/CategoryModal';
+
+/*
+ * Constants
+ */
+
+const expensesCategories = [
+  '🥑 Alimentos',
+  '👕 Ropa',
+  '💊 Salud',
+  '🚗 Transporte',
+  '📚 Educación',
+  '🍿 Entretenimiento',
+  '🍸 Salidas',
+  '🤷 Otro',
+];
 
 /*
  * Types
@@ -26,6 +42,12 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   componentId,
 }) => {
   const [value, setValue] = useState('');
+  const [category, setCategory] = useState('Gasto');
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   const onValueChange = (text: string) => {
     setValue(validateNumbers(text));
@@ -34,7 +56,7 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   const saveValue = async () => {
     const expenses = await AsyncStorage.getItem('VALUESX4');
     const n = expenses ? JSON.parse(expenses) : [];
-    n.push(['Gasto ', `$${value}`]);
+    n.push([`${category} $${value}`]);
     await AsyncStorage.setItem('VALUESX4', JSON.stringify(n)).then(() =>
       Navigation.pop(componentId),
     );
@@ -47,9 +69,17 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
         onValueChange={onValueChange}
         onSubmitEditing={saveValue}
       />
+      <TouchableOpacity style={styles.saveContainer} onPress={toggleModal}>
+        <Text style={styles.saveText}>Elegir categoría</Text>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.saveContainer} onPress={saveValue}>
         <Text style={styles.saveText}>Guardar</Text>
       </TouchableOpacity>
+      <CategoryModal
+        isVisible={isModalVisible}
+        toggleModal={toggleModal}
+        categories={expensesCategories}
+      />
     </View>
   );
 };

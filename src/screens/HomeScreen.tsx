@@ -46,7 +46,6 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
 }) => {
   useNavigationComponentDidAppear(() => {
     getExpenses();
-    console.log(expenses);
   });
 
   const [expenses, setExpenses] = useState([]);
