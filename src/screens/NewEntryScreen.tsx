@@ -46,6 +46,8 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   const [category, setCategory] = useState(expensesCategories[0]);
   const [isModalVisible, setModalVisible] = useState(false);
 
+  console.log(value);
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -61,10 +63,10 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   };
 
   const saveValue = async () => {
-    const expenses = await AsyncStorage.getItem('VALUESX6');
+    const expenses = await AsyncStorage.getItem('VALUESX9');
     const n = expenses ? JSON.parse(expenses) : [];
-    n.push([`${category} $${value}`]);
-    await AsyncStorage.setItem('VALUESX6', JSON.stringify(n)).then(() =>
+    n.push([category, value]);
+    await AsyncStorage.setItem('VALUESX9', JSON.stringify(n)).then(() =>
       Navigation.pop(componentId),
     );
   };

@@ -38,7 +38,7 @@ interface HomeScreenProps {
 }
 
 /*
- * Home Screen Component
+ * Home Screen
  */
 
 const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
@@ -51,7 +51,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
   const [expenses, setExpenses] = useState([]);
 
   const getExpenses = () => {
-    AsyncStorage.getItem('VALUESX6').then(expenses => {
+    AsyncStorage.getItem('VALUESX9').then(expenses => {
       setExpenses(JSON.parse(expenses || ''));
     });
   };
@@ -81,10 +81,10 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
         <EmptyMessage />
       ) : (
         <>
-          <CurrentBalance />
+          <CurrentBalance expenses={expenses} />
           <View style={styles.flatListContainer}>
             <FlatList
-              data={expenses.reverse()}
+              data={expenses}
               renderItem={renderExpenses}
               keyExtractor={(item, index) => index.toString()}
             />

@@ -2,13 +2,40 @@ import React, { FunctionComponent } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { Colors } from '../theme/colors';
+import { getExpensesBalance } from '../utils';
 
-export const CurrentBalance: FunctionComponent = () => (
-  <View style={styles.balanceContainer}>
-    <Text style={styles.balanceText}>Saldo actual</Text>
-    <Text style={styles.balanceNumber}>$ 1234,50</Text>
-  </View>
-);
+/*
+ * Constants
+ */
+
+/*
+ * Types
+ */
+
+interface CurrentBalanceProps {
+  expenses: string[];
+}
+
+/*
+ * Current Balance Component
+ */
+
+export const CurrentBalance: FunctionComponent<CurrentBalanceProps> = ({
+  expenses,
+}) => {
+  const expensesBalance = getExpensesBalance(expenses);
+  const formattedExpensesBalance = expensesBalance.toLocaleString('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+  });
+
+  return (
+    <View style={styles.balanceContainer}>
+      <Text style={styles.balanceText}>Saldo actual</Text>
+      <Text style={styles.balanceNumber}>{formattedExpensesBalance}</Text>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   balanceContainer: {
