@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { NumberInput } from '../components/NumberInput';
 import { Colors } from '../theme/colors';
-import { validateNumbers, removeLeadingZeros } from '../utils';
+import { validateNumbers, removeLeadingZeros, currencyFormat } from '../utils';
 import { CategoryModal } from '../components/CategoryModal';
 import { Spacer } from '../components/Spacer';
 
@@ -45,8 +45,6 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   const [value, setValue] = useState('');
   const [category, setCategory] = useState(expensesCategories[0]);
   const [isModalVisible, setModalVisible] = useState(false);
-
-  console.log(value);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);

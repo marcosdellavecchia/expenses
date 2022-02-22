@@ -17,6 +17,7 @@ import { Colors } from '../theme/colors';
 import { pushScreenVertically } from '../navigation';
 import { EmptyMessage } from '../components/EmptyMessage';
 import { CurrentBalance } from '../components/CurrentBalance';
+import { formatExpenses } from '../utils';
 
 /*
  * Constants
@@ -56,6 +57,8 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
     });
   };
 
+  const formattedExpenses = formatExpenses(expenses);
+
   const renderExpenses = ({ item, index }: any) => (
     <View style={styles.listTextContainer}>
       <Text style={styles.listText}>{item}</Text>
@@ -84,7 +87,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
           <CurrentBalance expenses={expenses} />
           <View style={styles.flatListContainer}>
             <FlatList
-              data={expenses}
+              data={formattedExpenses}
               renderItem={renderExpenses}
               keyExtractor={(item, index) => index.toString()}
             />
