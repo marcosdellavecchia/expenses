@@ -52,7 +52,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
   const [expenses, setExpenses] = useState([]);
 
   const getExpenses = () => {
-    AsyncStorage.getItem('VALUESX9').then(expenses => {
+    AsyncStorage.getItem('VALUESX10').then(expenses => {
       setExpenses(JSON.parse(expenses || ''));
     });
   };

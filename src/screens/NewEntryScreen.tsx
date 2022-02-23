@@ -17,7 +17,7 @@ import { Spacer } from '../components/Spacer';
  */
 
 const expenseCategories = [
-  '💸 Otros',
+  '💸 Otros gastos',
   '🥑 Alimentos',
   '👕 Ropa',
   '💊 Salud',
@@ -28,9 +28,8 @@ const expenseCategories = [
   '🍿 Entretenimiento',
   '🍸 Salidas',
   '🎁 Regalos',
+  '💰 Depósitos',
 ];
-
-const incomeCategories = ['💰 Salario', '💰 Depósitos', '💰 Otros'];
 
 /*
  * Types
@@ -66,10 +65,14 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   };
 
   const saveValue = async () => {
-    const expenses = await AsyncStorage.getItem('VALUESX9');
+    const expenses = await AsyncStorage.getItem('VALUESX10');
     const n = expenses ? JSON.parse(expenses) : [];
-    n.push([category, value]);
-    await AsyncStorage.setItem('VALUESX9', JSON.stringify(n)).then(() =>
+
+    category !== '💰 Depósitos'
+      ? n.push([category, -value])
+      : n.push([category, value]);
+
+    await AsyncStorage.setItem('VALUESX10', JSON.stringify(n)).then(() =>
       Navigation.pop(componentId),
     );
   };
