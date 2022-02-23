@@ -17,7 +17,7 @@ import { Colors } from '../theme/colors';
 import { pushScreenVertically } from '../navigation';
 import { EmptyMessage } from '../components/EmptyMessage';
 import { CurrentBalance } from '../components/CurrentBalance';
-import { formatExpenses } from '../utils';
+import { formatExpensesDetail } from '../utils';
 
 /*
  * Constants
@@ -57,7 +57,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
     });
   };
 
-  const formattedExpenses = formatExpenses(expenses);
+  const formattedExpenses = formatExpensesDetail(expenses);
 
   const renderExpenses = ({ item, index }: any) => (
     <View style={styles.listTextContainer}>

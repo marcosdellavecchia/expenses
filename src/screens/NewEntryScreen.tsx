@@ -16,16 +16,21 @@ import { Spacer } from '../components/Spacer';
  * Constants
  */
 
-const expensesCategories = [
-  '💸 Gastos varios',
+const expenseCategories = [
+  '💸 Otros',
   '🥑 Alimentos',
   '👕 Ropa',
   '💊 Salud',
+  '🚴 Deportes',
+  '🪥 Higiene',
   '🚗 Transporte',
   '📚 Educación',
   '🍿 Entretenimiento',
   '🍸 Salidas',
+  '🎁 Regalos',
 ];
+
+const incomeCategories = ['💰 Salario', '💰 Depósitos', '💰 Otros'];
 
 /*
  * Types
@@ -43,7 +48,7 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   componentId,
 }) => {
   const [value, setValue] = useState('');
-  const [category, setCategory] = useState(expensesCategories[0]);
+  const [category, setCategory] = useState(expenseCategories[0]);
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
@@ -94,7 +99,7 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
       <CategoryModal
         isVisible={isModalVisible}
         toggleModal={toggleModal}
-        categories={expensesCategories}
+        categories={expenseCategories}
         onCategoryChange={handleCategoryChange}
       />
     </View>

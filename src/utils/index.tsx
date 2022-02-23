@@ -14,7 +14,7 @@ export const getExpensesBalance = (expenses: string[]) => {
   return expenseNumbersSum;
 };
 
-export const formatExpenses = (expenses: string[]) => {
+export const formatExpensesDetail = (expenses: string[]) => {
   const formattedAmount = expenses.map(expense =>
     currencyFormat(Number(expense[1])),
   );
