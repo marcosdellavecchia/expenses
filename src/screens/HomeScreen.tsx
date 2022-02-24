@@ -14,7 +14,7 @@ import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks';
 
 import PlusButtonSvg from '../assets/plus-button.svg';
 import { Colors } from '../theme/colors';
-import { pushScreenVertically } from '../navigation';
+import { pushScreenVertically } from '../navigation/helpers';
 import { EmptyMessage } from '../components/EmptyMessage';
 import { CurrentBalance } from '../components/CurrentBalance';
 import { formatExpensesDetail } from '../utils';
