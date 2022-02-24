@@ -10,7 +10,8 @@ import {
 import Modal from 'react-native-modal';
 
 import { Colors } from '../theme/colors';
-import { EntryCategory } from '../interfaces';
+import { EntryCategory, EntryType } from '../interfaces';
+import { Spacer } from './Spacer';
 
 /*
  * Constants
@@ -50,13 +51,35 @@ export const CategoryModal: FunctionComponent<CategoryModalProps> = ({
       <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
         <View style={styles.screen}>
           <ScrollView style={styles.categoryScrollView}>
-            {categories.map((category, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() => handleCategoryChange(category)}>
-                <Text style={styles.categoryItemsText}> {category.label} </Text>
-              </TouchableOpacity>
-            ))}
+            <View>
+              <Text style={styles.categoryItemsText}>--- Gastos---</Text>
+              {categories
+                .filter(category => category.type === EntryType.EXPENSE)
+                .map((category, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    onPress={() => handleCategoryChange(category)}>
+                    <Text style={styles.categoryItemsText}>
+                      {category.label}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+            </View>
+            <Spacer size="xs" />
+            <View>
+              <Text style={styles.categoryItemsText}>--- Ingresos ---</Text>
+              {categories
+                .filter(category => category.type === EntryType.INCOME)
+                .map((category, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    onPress={() => handleCategoryChange(category)}>
+                    <Text style={styles.categoryItemsText}>
+                      {category.label}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+            </View>
           </ScrollView>
         </View>
       </Modal>

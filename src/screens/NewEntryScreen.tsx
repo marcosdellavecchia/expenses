@@ -49,14 +49,14 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   };
 
   const saveValue = async () => {
-    const entry = await AsyncStorage.getItem('VALUESX10');
+    const entry = await AsyncStorage.getItem('VALUESX11');
     const n = entry ? JSON.parse(entry) : [];
 
     category.type !== EntryType.INCOME
       ? n.push([category.label, -inputValue])
       : n.push([category.label, inputValue]);
 
-    await AsyncStorage.setItem('VALUESX10', JSON.stringify(n)).then(() =>
+    await AsyncStorage.setItem('VALUESX11', JSON.stringify(n)).then(() =>
       Navigation.pop(componentId),
     );
   };
