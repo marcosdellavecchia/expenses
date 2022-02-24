@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
     backgroundColor: `${Colors.ALMOST_BLACK}`,
   },
   categoryScrollView: {
-    padding: 10,
+    marginTop: 10,
+    marginBottom: 10,
   },
   categoryItemsText: {
     fontSize: 14,
