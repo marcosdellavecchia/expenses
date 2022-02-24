@@ -12,6 +12,7 @@ import Modal from 'react-native-modal';
 import { Colors } from '../theme/colors';
 import { EntryCategory, EntryType } from '../interfaces';
 import { Spacer } from './Spacer';
+import { replaceSpaceWithLinebreak } from '../utils';
 
 /*
  * Constants
@@ -51,31 +52,35 @@ export const CategoryModal: FunctionComponent<CategoryModalProps> = ({
       <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
         <View style={styles.screen}>
           <ScrollView style={styles.categoryScrollView}>
-            <View>
-              <Text style={styles.categoryItemsText}>--- Gastos---</Text>
+            <Text style={styles.categoryTitle}>Gastos</Text>
+            <View style={styles.categoryTouchableContainer}>
               {categories
                 .filter(category => category.type === EntryType.EXPENSE)
                 .map((category, index) => (
                   <TouchableOpacity
+                    style={styles.categoryItemsContainer}
                     key={index}
                     onPress={() => handleCategoryChange(category)}>
-                    <Text style={styles.categoryItemsText}>
-                      {category.label}
+                    <Text style={styles.categoryItemsText} numberOfLines={2}>
+                      {replaceSpaceWithLinebreak(category.label)}
                     </Text>
                   </TouchableOpacity>
                 ))}
             </View>
+
             <Spacer size="xs" />
-            <View>
-              <Text style={styles.categoryItemsText}>--- Ingresos ---</Text>
+
+            <Text style={styles.categoryTitle}>Ingresos</Text>
+            <View style={styles.categoryTouchableContainer}>
               {categories
                 .filter(category => category.type === EntryType.INCOME)
                 .map((category, index) => (
                   <TouchableOpacity
+                    style={styles.categoryItemsContainer}
                     key={index}
                     onPress={() => handleCategoryChange(category)}>
-                    <Text style={styles.categoryItemsText}>
-                      {category.label}
+                    <Text style={styles.categoryItemsText} numberOfLines={2}>
+                      {replaceSpaceWithLinebreak(category.label)}
                     </Text>
                   </TouchableOpacity>
                 ))}
@@ -100,13 +105,33 @@ const styles = StyleSheet.create({
     backgroundColor: `${Colors.ALMOST_BLACK}`,
   },
   categoryScrollView: {
-    marginTop: 10,
-    marginBottom: 10,
+    marginTop: 12,
+    marginBottom: 12,
+    marginLeft: 8,
+    marginRight: 8,
+    flex: 1,
+  },
+  categoryTouchableContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  categoryItemsContainer: {
+    width: 78,
+    height: 60,
+    margin: 5,
   },
   categoryItemsText: {
     fontSize: 14,
     textAlign: 'center',
     padding: 5,
     color: `${Colors.GRAY}`,
+  },
+  categoryTitle: {
+    fontSize: 14,
+    textAlign: 'center',
+    paddingBottom: 8,
+    color: `${Colors.DARK_GRAY}`,
+    textTransform: 'uppercase',
   },
 });

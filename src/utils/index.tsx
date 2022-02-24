@@ -27,3 +27,6 @@ export const formatExpensesDetail = (expenses: string[]) => {
 
   return formattedExpenses.reverse();
 };
+
+export const replaceSpaceWithLinebreak = (text: string) =>
+  text.split(' ').join('\n');

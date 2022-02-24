@@ -2,7 +2,7 @@ import { EntryType, EntryCategory } from '../interfaces';
 
 export const entryCategories: EntryCategory[] = [
   {
-    label: '🥑 Alimentos',
+    label: '🥑 Comida',
     value: 'FOOD',
     type: EntryType.EXPENSE,
   },
@@ -17,7 +17,7 @@ export const entryCategories: EntryCategory[] = [
     type: EntryType.EXPENSE,
   },
   {
-    label: '🚴 Deportes',
+    label: '🚴 Deporte',
     value: 'SPORTS',
     type: EntryType.EXPENSE,
   },
@@ -52,12 +52,12 @@ export const entryCategories: EntryCategory[] = [
     type: EntryType.EXPENSE,
   },
   {
-    label: '💸 Otros gastos',
+    label: '💸 Otros',
     value: 'OTHER_EXPENSES',
     type: EntryType.EXPENSE,
   },
   {
-    label: '💰 Salario',
+    label: '💰 Sueldo',
     value: 'SALARY',
     type: EntryType.INCOME,
   },
@@ -67,7 +67,7 @@ export const entryCategories: EntryCategory[] = [
     type: EntryType.INCOME,
   },
   {
-    label: '💰 Otros ingresos',
+    label: '💰 Otros',
     value: 'OTHER_INCOMES',
     type: EntryType.INCOME,
   },
