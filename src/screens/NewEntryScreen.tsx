@@ -11,25 +11,8 @@ import { Colors } from '../theme/colors';
 import { validateNumbers, removeLeadingZeros, currencyFormat } from '../utils';
 import { CategoryModal } from '../components/CategoryModal';
 import { Spacer } from '../components/Spacer';
-
-/*
- * Constants
- */
-
-const expenseCategories = [
-  '💸 Otros gastos',
-  '🥑 Alimentos',
-  '👕 Ropa',
-  '💊 Salud',
-  '🚴 Deportes',
-  '🪥 Higiene',
-  '🚗 Transporte',
-  '📚 Educación',
-  '🍿 Entretenimiento',
-  '🍸 Salidas',
-  '🎁 Regalos',
-  '💰 Depósitos',
-];
+import { entryCategories } from '../data';
+import { EntryCategory, EntryType } from '../interfaces';
 
 /*
  * Types
@@ -46,31 +29,32 @@ interface NewEntryScreenProps {
 const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   componentId,
 }) => {
-  const [value, setValue] = useState('');
-  const [category, setCategory] = useState(expenseCategories[0]);
+  const [inputValue, setinputValue] = useState('');
+  const [category, setCategory] = useState(entryCategories[0]);
   const [isModalVisible, setModalVisible] = useState(false);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  const handleCategoryChange = (selectedCategory: string) => {
+  const handleCategoryChange = (selectedCategory: EntryCategory) => {
     setCategory(selectedCategory);
+    console.log(selectedCategory);
   };
 
   const onInputValueChange = (text: string) => {
     const sanitizedValue = validateNumbers(text);
     const sanitizedValueWithoutZeros = removeLeadingZeros(sanitizedValue);
-    setValue(sanitizedValueWithoutZeros);
+    setinputValue(sanitizedValueWithoutZeros);
   };
 
   const saveValue = async () => {
-    const expenses = await AsyncStorage.getItem('VALUESX10');
-    const n = expenses ? JSON.parse(expenses) : [];
+    const entry = await AsyncStorage.getItem('VALUESX10');
+    const n = entry ? JSON.parse(entry) : [];
 
-    category !== '💰 Depósitos'
-      ? n.push([category, -value])
-      : n.push([category, value]);
+    category.type !== EntryType.INCOME
+      ? n.push([category.label, -inputValue])
+      : n.push([category.label, inputValue]);
 
     await AsyncStorage.setItem('VALUESX10', JSON.stringify(n)).then(() =>
       Navigation.pop(componentId),
@@ -78,7 +62,7 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   };
 
   const handleSubmit = () => {
-    if (value.length === 0 || Number(value) == 0) {
+    if (inputValue.length === 0 || Number(inputValue) == 0) {
       return;
     }
     saveValue();
@@ -87,13 +71,13 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   return (
     <View style={styles.screen}>
       <NumberInput
-        value={value}
+        value={inputValue}
         onValueChange={onInputValueChange}
         onSubmitEditing={saveValue}
       />
       <Spacer size="l" />
       <TouchableOpacity onPress={toggleModal}>
-        <Text style={styles.categoryText}>{category}</Text>
+        <Text style={styles.categoryText}>{category.label}</Text>
       </TouchableOpacity>
       <Spacer />
       <TouchableOpacity style={styles.saveContainer} onPress={handleSubmit}>
@@ -102,7 +86,7 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
       <CategoryModal
         isVisible={isModalVisible}
         toggleModal={toggleModal}
-        categories={expenseCategories}
+        categories={entryCategories}
         onCategoryChange={handleCategoryChange}
       />
     </View>

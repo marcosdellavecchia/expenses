@@ -10,6 +10,7 @@ import {
 import Modal from 'react-native-modal';
 
 import { Colors } from '../theme/colors';
+import { EntryCategory } from '../interfaces';
 
 /*
  * Constants
@@ -25,8 +26,8 @@ const SCREEN_HEIGHT = Dimensions.get('screen').height;
 interface CategoryModalProps {
   isVisible: boolean;
   toggleModal: () => void;
-  categories: string[];
-  onCategoryChange: (selectedCategory: string) => void;
+  categories: EntryCategory[];
+  onCategoryChange: (selectedCategory: EntryCategory) => void;
 }
 
 /*
@@ -39,7 +40,7 @@ export const CategoryModal: FunctionComponent<CategoryModalProps> = ({
   categories,
   onCategoryChange,
 }) => {
-  const handleCategoryChange = (category: string) => {
+  const handleCategoryChange = (category: EntryCategory) => {
     onCategoryChange(category);
     toggleModal();
   };
@@ -53,7 +54,7 @@ export const CategoryModal: FunctionComponent<CategoryModalProps> = ({
               <TouchableOpacity
                 key={index}
                 onPress={() => handleCategoryChange(category)}>
-                <Text style={styles.categoryItemsText}> {category} </Text>
+                <Text style={styles.categoryItemsText}> {category.label} </Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
