@@ -49,8 +49,10 @@ export const CategoryModal: FunctionComponent<CategoryModalProps> = ({
       <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
         <View style={styles.screen}>
           <ScrollView style={styles.categoryScrollView}>
-            {categories.map(category => (
-              <TouchableOpacity onPress={() => handleCategoryChange(category)}>
+            {categories.map((category, index) => (
+              <TouchableOpacity
+                key={index}
+                onPress={() => handleCategoryChange(category)}>
                 <Text style={styles.categoryItemsText}> {category} </Text>
               </TouchableOpacity>
             ))}
