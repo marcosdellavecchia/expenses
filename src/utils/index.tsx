@@ -14,18 +14,11 @@ export const getExpensesBalance = (expenses: string[]) => {
   return expenseNumbersSum;
 };
 
-export const formatExpensesDetail = (expenses: string[]) => {
-  const formattedAmount = expenses.map(expense =>
-    currencyFormat(Number(expense[1])),
-  );
-  const formattedCategory = expenses.map(expense => expense[0] + ' ');
-  const formattedExpenses = [];
+export const formatExpenseDetail = (expense: string[]): string => {
+  const formattedAmount = currencyFormat(Number(expense[1]));
+  const formattedCategory = expense[0] + ' ';
 
-  for (let i = 0; i < formattedAmount.length; i++) {
-    formattedExpenses.push(formattedCategory[i] + ' ' + formattedAmount[i]);
-  }
-
-  return formattedExpenses.reverse();
+  return formattedCategory + ' ' + formattedAmount;
 };
 
 export const replaceSpaceWithLinebreak = (text: string) =>

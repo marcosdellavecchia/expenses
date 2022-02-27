@@ -52,6 +52,16 @@ export const entryCategories: EntryCategory[] = [
     type: EntryType.EXPENSE,
   },
   {
+    label: '🏠 Hogar',
+    value: 'HOME',
+    type: EntryType.EXPENSE,
+  },
+  {
+    label: '🧾 Facturas',
+    value: 'RECEIPT',
+    type: EntryType.EXPENSE,
+  },
+  {
     label: '💸 Otros',
     value: 'OTHER_EXPENSES',
     type: EntryType.EXPENSE,

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
   Dimensions,
+  Alert,
 } from 'react-native';
 import { NavigationFunctionComponent } from 'react-native-navigation';
 import GestureRecognizer from 'react-native-swipe-gestures';
@@ -17,7 +18,7 @@ import { Colors } from '../theme/colors';
 import { pushScreenVertically } from '../navigation/helpers';
 import { EmptyMessage } from '../components/EmptyMessage';
 import { CurrentBalance } from '../components/CurrentBalance';
-import { formatExpensesDetail } from '../utils';
+import { formatExpenseDetail } from '../utils';
 
 /*
  * Constants
@@ -57,16 +58,36 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
     });
   };
 
-  const formattedExpenses = formatExpensesDetail(expenses);
+  const removeExpenses = async (item: any) => {
+    const newExpenses = await expenses.filter(expense => expense !== item);
+    await AsyncStorage.setItem('VALUESX11', JSON.stringify(newExpenses)).then(
+      () => getExpenses(),
+    );
+  };
 
-  const renderExpenses = ({ item, index }: any) => (
-    <View style={styles.listTextContainer}>
-      <Text style={styles.listText}>{item}</Text>
-    </View>
+  const renderExpenses = ({ item }: any) => (
+    <TouchableOpacity
+      style={styles.listTextContainer}
+      onLongPress={() => showRemoveAlert(item)}>
+      <Text style={styles.listText}>{formatExpenseDetail(item)}</Text>
+    </TouchableOpacity>
   );
 
   const handleNewEntryNavigation = () =>
     pushScreenVertically(componentId, 'NewEntry');
+
+  const showRemoveAlert = (item: any) =>
+    Alert.alert('Eliminar', '¿Deseas eliminar este item?', [
+      {
+        text: 'Cancelar',
+        style: 'cancel',
+      },
+      {
+        text: 'Eliminar',
+        style: 'destructive',
+        onPress: () => removeExpenses(item),
+      },
+    ]);
 
   return (
     <GestureRecognizer
@@ -87,7 +108,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
           <CurrentBalance expenses={expenses} />
           <View style={styles.flatListContainer}>
             <FlatList
-              data={formattedExpenses}
+              data={expenses}
               renderItem={renderExpenses}
               keyExtractor={(item, index) => index.toString()}
             />
