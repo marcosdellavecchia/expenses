@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { NumberInput } from '../components/NumberInput';
 import { Colors } from '../theme/colors';
-import { validateNumbers, removeLeadingZeros, currencyFormat } from '../utils';
+import { validateNumbers, removeLeadingZeros } from '../utils';
 import { CategoryModal } from '../components/CategoryModal';
 import { Spacer } from '../components/Spacer';
 import { entryCategories } from '../data';
