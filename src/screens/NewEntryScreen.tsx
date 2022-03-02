@@ -13,6 +13,7 @@ import { CategoryModal } from '../components/CategoryModal';
 import { Spacer } from '../components/Spacer';
 import { entryCategories } from '../data';
 import { EntryCategory, EntryType } from '../interfaces';
+import { STORAGE_ITEM_NAME } from '../data';
 
 /*
  * Types
@@ -49,14 +50,14 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   };
 
   const saveValue = async () => {
-    const entry = await AsyncStorage.getItem('VALUESX11');
+    const entry = await AsyncStorage.getItem(STORAGE_ITEM_NAME);
     const n = entry ? JSON.parse(entry) : [];
 
     category.type !== EntryType.INCOME
       ? n.push([category.label, -inputValue])
       : n.push([category.label, inputValue]);
 
-    await AsyncStorage.setItem('VALUESX11', JSON.stringify(n)).then(() =>
+    await AsyncStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(n)).then(() =>
       Navigation.pop(componentId),
     );
   };

@@ -45,3 +45,9 @@ export const getCurrentMonth = (): any => {
 
   return monthNames[monthNumber];
 };
+
+export const getCurrentMonthExpenses = (expenses: any, month: string) => {
+  return expenses.filter(
+    (expenses: any) => JSON.stringify(expenses).indexOf(month) !== -1,
+  );
+};

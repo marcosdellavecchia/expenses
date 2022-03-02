@@ -2,11 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { Colors } from '../theme/colors';
-import {
-  getExpensesBalance,
-  getCurrentMonth,
-  formatToCurrency,
-} from '../utils';
+import { getExpensesBalance, formatToCurrency } from '../utils';
 
 /*
  * Types
@@ -14,6 +10,7 @@ import {
 
 interface CurrentBalanceProps {
   expenses: string[];
+  currentMonth: string;
 }
 
 /*
@@ -22,10 +19,11 @@ interface CurrentBalanceProps {
 
 export const CurrentBalance: FunctionComponent<CurrentBalanceProps> = ({
   expenses,
+  currentMonth,
 }) => {
   const expensesBalance = getExpensesBalance(expenses);
   const formattedExpensesBalance = formatToCurrency(expensesBalance);
-  const currentMonth = getCurrentMonth();
+
   return (
     <View style={styles.balanceContainer}>
       <Text style={styles.balanceText}>Saldo de {currentMonth}</Text>

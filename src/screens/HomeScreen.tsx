@@ -18,7 +18,8 @@ import { Colors } from '../theme/colors';
 import { pushScreenVertically } from '../navigation/helpers';
 import { EmptyMessage } from '../components/EmptyMessage';
 import { CurrentBalance } from '../components/CurrentBalance';
-import { formatExpenseDetail } from '../utils';
+import { formatExpenseDetail, getCurrentMonth } from '../utils';
+import { STORAGE_ITEM_NAME } from '../data';
 
 /*
  * Constants
@@ -30,6 +31,8 @@ const GESTURE_RECOGNIZER_CONFIG = {
 };
 
 const SCREEN_WIDTH = Dimensions.get('screen').width;
+
+const currentMonth = getCurrentMonth();
 
 /*
  * Types
@@ -53,16 +56,17 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
   const [expenses, setExpenses] = useState([]);
 
   const getExpenses = () => {
-    AsyncStorage.getItem('VALUESX11').then(expenses => {
+    AsyncStorage.getItem(STORAGE_ITEM_NAME).then(expenses => {
       setExpenses(JSON.parse(expenses || ''));
     });
   };
 
   const removeExpenses = async (item: any) => {
     const newExpenses = await expenses.filter(expense => expense !== item);
-    await AsyncStorage.setItem('VALUESX11', JSON.stringify(newExpenses)).then(
-      () => getExpenses(),
-    );
+    await AsyncStorage.setItem(
+      STORAGE_ITEM_NAME,
+      JSON.stringify(newExpenses),
+    ).then(() => getExpenses());
   };
 
   const renderExpenses = ({ item }: any) => (
@@ -105,7 +109,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
         <EmptyMessage />
       ) : (
         <>
-          <CurrentBalance expenses={expenses} />
+          <CurrentBalance expenses={expenses} currentMonth={currentMonth} />
           <View style={styles.flatListContainer}>
             <FlatList
               data={expenses}

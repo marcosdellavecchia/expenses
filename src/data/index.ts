@@ -1,5 +1,7 @@
 import { EntryType, EntryCategory } from '../interfaces';
 
+export const STORAGE_ITEM_NAME = 'VALUESMONTHLY2';
+
 export const entryCategories: EntryCategory[] = [
   {
     label: '🥑 Comida',
