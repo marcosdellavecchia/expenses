@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { StyleSheet } from 'react-native';
 import GestureRecognizer from 'react-native-swipe-gestures';
+
 import { Colors } from '../theme/colors';
 
 /*

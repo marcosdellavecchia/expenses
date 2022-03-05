@@ -9,11 +9,11 @@ import {
   Alert,
 } from 'react-native';
 import { NavigationFunctionComponent } from 'react-native-navigation';
-import GestureRecognizer from 'react-native-swipe-gestures';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks';
 
 import { SwipeDownWrapper } from '../components/SwipeDownWrapper';
+import { Separator } from '../components/Separator';
 import PlusButtonSvg from '../assets/plus-button.svg';
 import { Colors } from '../theme/colors';
 import { pushScreenVertically } from '../navigation/helpers';
@@ -115,6 +115,8 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
               data={expenses}
               renderItem={renderExpenses}
               keyExtractor={(item, index) => index.toString()}
+              ItemSeparatorComponent={Separator}
+              initialNumToRender={15}
             />
           </View>
         </>
@@ -134,8 +136,6 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH * 0.9,
   },
   listTextContainer: {
-    borderBottomWidth: 0.5,
-    borderColor: `${Colors.DARK_GRAY}`,
     width: SCREEN_WIDTH * 0.9,
   },
   listText: {
