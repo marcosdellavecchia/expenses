@@ -18,7 +18,7 @@ import { Colors } from '../theme/colors';
 import { pushScreenVertically } from '../navigation/helpers';
 import { EmptyMessage } from '../components/EmptyMessage';
 import { CurrentBalance } from '../components/CurrentBalance';
-import { formatExpenseDetail, getCurrentMonth } from '../utils';
+import { formatExpenseDetail, getCurrentMonth, getCurrentYear } from '../utils';
 import { STORAGE_ITEM_NAME } from '../data';
 
 /*
@@ -33,6 +33,7 @@ const GESTURE_RECOGNIZER_CONFIG = {
 const SCREEN_WIDTH = Dimensions.get('screen').width;
 
 const currentMonth = getCurrentMonth();
+const currentYear = getCurrentYear();
 
 /*
  * Types
@@ -57,7 +58,12 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
 
   const getExpenses = () => {
     AsyncStorage.getItem(STORAGE_ITEM_NAME).then(expenses => {
-      setExpenses(JSON.parse(expenses || ''));
+      const parsedExpenses = JSON.parse(expenses || '');
+      const currentMonthExpenses = parsedExpenses.filter((expenses: string[]) =>
+        expenses.includes(`${currentMonth}-${currentYear}`),
+      );
+
+      setExpenses(currentMonthExpenses);
     });
   };
 
@@ -92,7 +98,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
         onPress: () => removeExpenses(item),
       },
     ]);
-
+  console.log(expenses);
   return (
     <GestureRecognizer
       onSwipeDown={handleNewEntryNavigation}

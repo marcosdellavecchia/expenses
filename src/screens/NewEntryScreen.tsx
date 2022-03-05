@@ -8,7 +8,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { NumberInput } from '../components/NumberInput';
 import { Colors } from '../theme/colors';
-import { validateNumbers, removeLeadingZeros } from '../utils';
+import {
+  validateNumbers,
+  removeLeadingZeros,
+  getCurrentMonth,
+  getCurrentYear,
+} from '../utils';
 import { CategoryModal } from '../components/CategoryModal';
 import { Spacer } from '../components/Spacer';
 import { entryCategories } from '../data';
@@ -34,6 +39,9 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   const [category, setCategory] = useState(entryCategories[0]);
   const [isModalVisible, setModalVisible] = useState(false);
 
+  const currentMonth = getCurrentMonth();
+  const currentYear = getCurrentYear();
+
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
@@ -54,8 +62,8 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
     const n = entry ? JSON.parse(entry) : [];
 
     category.type !== EntryType.INCOME
-      ? n.push([category.label, -inputValue])
-      : n.push([category.label, inputValue]);
+      ? n.push([category.label, -inputValue, `${currentMonth}-${currentYear}`])
+      : n.push([category.label, inputValue, `${currentMonth}-${currentYear}`]);
 
     await AsyncStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(n)).then(() =>
       Navigation.pop(componentId),
