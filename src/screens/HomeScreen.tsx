@@ -13,6 +13,7 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks';
 
+import { SwipeDownWrapper } from '../components/SwipeDownWrapper';
 import PlusButtonSvg from '../assets/plus-button.svg';
 import { Colors } from '../theme/colors';
 import { pushScreenVertically } from '../navigation/helpers';
@@ -24,11 +25,6 @@ import { STORAGE_ITEM_NAME } from '../data';
 /*
  * Constants
  */
-
-const GESTURE_RECOGNIZER_CONFIG = {
-  velocityThreshold: 0.3,
-  directionalOffsetThreshold: 80,
-};
 
 const SCREEN_WIDTH = Dimensions.get('screen').width;
 
@@ -99,11 +95,9 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
       },
     ]);
   console.log(expenses);
+
   return (
-    <GestureRecognizer
-      onSwipeDown={handleNewEntryNavigation}
-      config={GESTURE_RECOGNIZER_CONFIG}
-      style={styles.screen}>
+    <SwipeDownWrapper onSwipeDown={handleNewEntryNavigation}>
       <View style={styles.roundButtonContainer}>
         <TouchableOpacity
           accessibilityLabel="Add new entry"
@@ -125,17 +119,11 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
           </View>
         </>
       )}
-    </GestureRecognizer>
+    </SwipeDownWrapper>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: `${Colors.BLACK}`,
-  },
   roundButtonContainer: {
     position: 'absolute',
     top: '5%',
