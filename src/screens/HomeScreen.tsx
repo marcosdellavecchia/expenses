@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
   },
   balanceContainer: {
     position: 'absolute',
-    top: '5%',
+    top: 0,
   },
   listTextContainer: {
     width: SCREEN_WIDTH * 0.9,
