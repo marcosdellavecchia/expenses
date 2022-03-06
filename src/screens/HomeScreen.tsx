@@ -12,9 +12,7 @@ import { NavigationFunctionComponent } from 'react-native-navigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks';
 
-import { SwipeDownWrapper } from '../components/SwipeDownWrapper';
 import { Separator } from '../components/Separator';
-import { Spacer } from '../components/Spacer';
 import PlusButtonSvg from '../assets/plus-button.svg';
 import { Colors } from '../theme/colors';
 import { pushScreenVertically } from '../navigation/helpers';
@@ -98,23 +96,14 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
   console.log(expenses);
 
   return (
-    <SwipeDownWrapper
-      onSwipeDown={handleNewEntryNavigation}
-      style={styles.screen}>
-      <View style={styles.roundButtonContainer}>
-        <TouchableOpacity
-          accessibilityLabel="Add new entry"
-          onPress={handleNewEntryNavigation}>
-          <PlusButtonSvg width={40} height={40} color={Colors.WHITE} />
-        </TouchableOpacity>
-      </View>
+    <View style={styles.screen}>
       {expenses.length === 0 ? (
         <EmptyMessage />
       ) : (
         <>
-          <Spacer size="xl" />
-          <Spacer size="l" />
-          <CurrentBalance expenses={expenses} currentMonth={currentMonth} />
+          <View style={styles.balanceContainer}>
+            <CurrentBalance expenses={expenses} currentMonth={currentMonth} />
+          </View>
           <View style={styles.flatListContainer}>
             <FlatList
               data={expenses}
@@ -126,7 +115,14 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
           </View>
         </>
       )}
-    </SwipeDownWrapper>
+      <View style={styles.roundButtonContainer}>
+        <TouchableOpacity
+          accessibilityLabel="Add new entry"
+          onPress={handleNewEntryNavigation}>
+          <PlusButtonSvg width={45} height={45} color={Colors.WHITE} />
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
@@ -139,13 +135,18 @@ const styles = StyleSheet.create({
   },
   roundButtonContainer: {
     position: 'absolute',
-    top: '5%',
+    bottom: '4%',
     right: '5%',
   },
   flatListContainer: {
-    height: '60%',
-    paddingBottom: 20,
+    position: 'absolute',
+    bottom: 0,
+    height: '55%',
     width: SCREEN_WIDTH * 0.9,
+  },
+  balanceContainer: {
+    position: 'absolute',
+    top: '5%',
   },
   listTextContainer: {
     width: SCREEN_WIDTH * 0.9,

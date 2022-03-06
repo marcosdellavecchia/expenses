@@ -12,7 +12,7 @@ export const EmptyMessage: FunctionComponent = () => (
     <Text style={styles.h1}>Cargá tu primer gasto</Text>
     <Spacer size="xs" />
     <Text style={styles.body1}>
-      Podés presionar el botón o deslizar hacia abajo
+      Presioná el botón en la esquina inferior derecha
     </Text>
   </>
 );
