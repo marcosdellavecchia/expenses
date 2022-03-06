@@ -1,8 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { StyleSheet } from 'react-native';
 import GestureRecognizer from 'react-native-swipe-gestures';
-
-import { Colors } from '../theme/colors';
 
 /*
  * Constants
@@ -19,6 +16,7 @@ const GESTURE_RECOGNIZER_CONFIG = {
 
 interface SwipeDownWrapperProps {
   onSwipeDown: () => void;
+  style: any;
 }
 
 /*
@@ -28,22 +26,14 @@ interface SwipeDownWrapperProps {
 export const SwipeDownWrapper: FunctionComponent<SwipeDownWrapperProps> = ({
   onSwipeDown,
   children,
+  style,
 }) => {
   return (
     <GestureRecognizer
       onSwipeDown={onSwipeDown}
       config={GESTURE_RECOGNIZER_CONFIG}
-      style={styles.screen}>
+      style={style}>
       {children}
     </GestureRecognizer>
   );
 };
-
-const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: `${Colors.BLACK}`,
-  },
-});

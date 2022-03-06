@@ -28,6 +28,9 @@ export const pushScreenVertically = (
             },
           },
         },
+        bottomTabs: {
+          visible: true,
+        },
         topBar: {
           visible: true,
           animate: true,
@@ -39,28 +42,6 @@ export const pushScreenVertically = (
           },
         },
       },
-    },
-  });
-};
-
-export const showModal = (screenName: string) => {
-  Navigation.showModal({
-    stack: {
-      children: [
-        {
-          component: {
-            name: screenName,
-            options: {
-              topBar: {
-                visible: true,
-                title: {
-                  alignment: 'center',
-                },
-              },
-            },
-          },
-        },
-      ],
     },
   });
 };
