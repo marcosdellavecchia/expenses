@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     marginBottom: 80,
   },
   balanceText: {
+    fontFamily: 'OpenSans-Regular',
     fontSize: 16,
     padding: 5,
     textAlign: 'center',
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
   },
   balanceNumber: {
     fontSize: 42,
-    fontWeight: 'bold',
+    fontFamily: 'OpenSans-Bold',
     color: `${Colors.WHITE}`,
   },
 });

@@ -21,10 +21,11 @@ const styles = StyleSheet.create({
   },
   h1: {
     fontSize: 26,
-    fontWeight: 'bold',
+    fontFamily: 'OpenSans-Bold',
     color: `${Colors.GRAY}`,
   },
   body1: {
+    fontFamily: 'OpenSans-Regular',
     fontSize: 16,
     color: `${Colors.DARK_GRAY}`,
   },

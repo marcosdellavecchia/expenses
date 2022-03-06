@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks';
 
 import { Separator } from '../components/Separator';
-import PlusButtonSvg from '../assets/plus-button.svg';
+import PlusButtonSvg from '../assets/images/plus-button.svg';
 import { Colors } from '../theme/colors';
 import { pushScreenVertically } from '../navigation/helpers';
 import { EmptyMessage } from '../components/EmptyMessage';
@@ -93,7 +93,6 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
         onPress: () => removeExpenses(item),
       },
     ]);
-  console.log(expenses);
 
   return (
     <View style={styles.screen}>
@@ -152,6 +151,7 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH * 0.9,
   },
   listText: {
+    fontFamily: 'OpenSans-Regular',
     fontSize: 16,
     paddingTop: 8,
     paddingBottom: 8,

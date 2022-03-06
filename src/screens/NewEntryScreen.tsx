@@ -129,10 +129,12 @@ const styles = StyleSheet.create({
     backgroundColor: `${Colors.DARK_GRAY}`,
   },
   saveText: {
+    fontFamily: 'OpenSans-Regular',
     fontSize: 16,
     color: `${Colors.ALMOST_BLACK}`,
   },
   categoryText: {
+    fontFamily: 'OpenSans-Regular',
     fontSize: 16,
     color: `${Colors.GRAY}`,
   },

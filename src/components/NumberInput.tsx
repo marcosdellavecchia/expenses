@@ -38,11 +38,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
+    fontFamily: 'OpenSans-Bold',
     textAlign: 'center',
     borderBottomWidth: 1,
     borderBottomColor: `${Colors.WHITE}`,
     color: `${Colors.WHITE}`,
     fontSize: 42,
-    fontWeight: 'bold',
   },
 });

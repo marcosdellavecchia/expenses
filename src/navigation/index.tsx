@@ -37,7 +37,7 @@ export const startApp = (): void => {
               ],
               options: {
                 bottomTab: {
-                  icon: require('../assets/home-tab-icon.png'),
+                  icon: require('../assets/images/home-tab-icon.png'),
                 },
               },
             },
@@ -55,7 +55,7 @@ export const startApp = (): void => {
               ],
               options: {
                 bottomTab: {
-                  icon: require('../assets/settings-tab-icon.png'),
+                  icon: require('../assets/images/settings-tab-icon.png'),
                 },
               },
             },

@@ -50,8 +50,8 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
   },
   roundButtonText: {
+    fontFamily: 'OpenSans-Bold',
     fontSize: 26,
-    fontWeight: 'bold',
     color: `${Colors.BLACK}`,
   },
 });

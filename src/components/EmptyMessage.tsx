@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-import EmptyBoxSvg from '../assets/empty-box.svg';
+import EmptyBoxSvg from '../assets/images/empty-box.svg';
 import { Colors } from '../theme/colors';
 import { Spacer } from './Spacer';
 
@@ -25,11 +25,12 @@ const styles = StyleSheet.create({
     backgroundColor: `${Colors.BLACK}`,
   },
   h1: {
+    fontFamily: 'OpenSans-Bold',
     fontSize: 26,
-    fontWeight: 'bold',
     color: `${Colors.GRAY}`,
   },
   body1: {
+    fontFamily: 'OpenSans-Regular',
     fontSize: 16,
     color: `${Colors.DARK_GRAY}`,
   },

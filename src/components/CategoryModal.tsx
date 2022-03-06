@@ -122,12 +122,14 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   categoryItemsText: {
+    fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     textAlign: 'center',
     padding: 5,
     color: `${Colors.GRAY}`,
   },
   categoryTitle: {
+    fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     textAlign: 'center',
     paddingBottom: 8,
