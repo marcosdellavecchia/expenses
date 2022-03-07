@@ -62,8 +62,16 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
     const n = entry ? JSON.parse(entry) : [];
 
     category.type !== EntryType.INCOME
-      ? n.push([category.label, -inputValue, `${currentMonth}-${currentYear}`])
-      : n.push([category.label, inputValue, `${currentMonth}-${currentYear}`]);
+      ? n.unshift([
+          category.label,
+          -inputValue,
+          `${currentMonth}-${currentYear}`,
+        ])
+      : n.unshift([
+          category.label,
+          inputValue,
+          `${currentMonth}-${currentYear}`,
+        ]);
 
     await AsyncStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(n)).then(() =>
       Navigation.pop(componentId),
