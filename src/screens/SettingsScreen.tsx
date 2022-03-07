@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,20 +7,41 @@ import {
   Alert,
   TouchableOpacity,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationFunctionComponent } from 'react-native-navigation';
+import RNRestart from 'react-native-restart';
 
 import { Spacer } from '../components/Spacer';
 import { Colors } from '../theme/colors';
 
-const SettingsScreen: FunctionComponent = () => {
+/*
+ * Types
+ */
+
+interface SettingsScreenProps {
+  componentId: string;
+}
+
+/*
+ * Settings Screen
+ */
+
+const SettingsScreen: NavigationFunctionComponent<SettingsScreenProps> = ({
+  componentId,
+}) => {
   const [isLightThemeEnabled, setIsLightThemeEnabled] = useState(false);
 
   const toggleSwitch = () =>
     setIsLightThemeEnabled(previousState => !previousState);
 
-  const handleDeletePress = () =>
+  const clearAsyncStorage = async () => {
+    AsyncStorage.clear().then(() => RNRestart.Restart());
+  };
+
+  const showRemoveAlert = () =>
     Alert.alert(
       'Eliminar datos',
-      '¿Deseas eliminar todos los datos de la app?',
+      '¿Deseas eliminar por completo los datos almacenados?',
       [
         {
           text: 'Cancelar',
@@ -29,7 +50,7 @@ const SettingsScreen: FunctionComponent = () => {
         {
           text: 'Eliminar',
           style: 'destructive',
-          onPress: () => {},
+          onPress: () => clearAsyncStorage(),
         },
       ],
     );
@@ -38,7 +59,7 @@ const SettingsScreen: FunctionComponent = () => {
     <View style={styles.screen}>
       <Text style={styles.h1}>Configuración</Text>
       <Spacer />
-      <View style={styles.switchContainer}>
+      <View style={styles.optionContainer}>
         <Text style={styles.body1}>Modo claro</Text>
         <Switch
           trackColor={{ false: `${Colors.DARK_GRAY}`, true: '#81b0ff' }}
@@ -48,9 +69,12 @@ const SettingsScreen: FunctionComponent = () => {
         />
       </View>
       <Spacer size="s" />
-      <Text style={styles.body1}>Moneda</Text>
+      <View style={styles.optionContainer}>
+        <Text style={styles.body1}>Símbolo de moneda</Text>
+        <Text style={styles.disabled}>No disponible</Text>
+      </View>
       <Spacer size="s" />
-      <TouchableOpacity onPress={handleDeletePress}>
+      <TouchableOpacity onPress={showRemoveAlert}>
         <Text style={styles.body1}>Eliminar datos</Text>
       </TouchableOpacity>
     </View>
@@ -70,7 +94,7 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Bold',
     color: `${Colors.GRAY}`,
   },
-  switchContainer: {
+  optionContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -80,6 +104,12 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Regular',
     fontSize: 16,
     color: `${Colors.WHITE}`,
+  },
+  disabled: {
+    alignContent: 'flex-start',
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 16,
+    color: `${Colors.DARK_GRAY}`,
   },
 });
 
