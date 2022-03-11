@@ -20,6 +20,7 @@ import { EmptyMessage } from '../components/EmptyMessage';
 import { CurrentBalance } from '../components/CurrentBalance';
 import { formatExpenseDetail, getCurrentMonth, getCurrentYear } from '../utils';
 import { STORAGE_ITEM_NAME } from '../data';
+import { Expense } from '../interfaces';
 
 /*
  * Constants
@@ -54,8 +55,9 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
   const getExpenses = () => {
     AsyncStorage.getItem(STORAGE_ITEM_NAME).then(expenses => {
       const parsedExpenses = JSON.parse(expenses || '');
-      const currentMonthExpenses = parsedExpenses.filter((expenses: string[]) =>
-        expenses.includes(`${currentMonth}-${currentYear}`),
+      const currentMonthExpenses = parsedExpenses.filter(
+        (expenses: Expense) =>
+          expenses.storeDate === `${currentMonth}-${currentYear}`,
       );
 
       setExpenses(currentMonthExpenses);
@@ -71,11 +73,14 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
   };
 
   const renderExpenses = ({ item }: any) => (
-    <TouchableOpacity
-      style={styles.listTextContainer}
-      onLongPress={() => showRemoveAlert(item)}>
-      <Text style={styles.listText}>{formatExpenseDetail(item)}</Text>
-    </TouchableOpacity>
+    <>
+      {true && <Text style={styles.dateText}>{item.displayDate}</Text>}
+      <TouchableOpacity
+        style={styles.listTextContainer}
+        onLongPress={() => showRemoveAlert(item)}>
+        <Text style={styles.listText}>{formatExpenseDetail(item)}</Text>
+      </TouchableOpacity>
+    </>
   );
 
   const handleNewEntryNavigation = () =>
@@ -140,7 +145,7 @@ const styles = StyleSheet.create({
   flatListContainer: {
     position: 'absolute',
     bottom: 0,
-    height: '55%',
+    height: '60%',
     width: SCREEN_WIDTH * 0.9,
   },
   balanceContainer: {
@@ -149,6 +154,13 @@ const styles = StyleSheet.create({
   },
   listTextContainer: {
     width: SCREEN_WIDTH * 0.9,
+  },
+  dateText: {
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 16,
+    paddingTop: 8,
+    paddingBottom: 8,
+    color: `${Colors.GRAY}`,
   },
   listText: {
     fontFamily: 'OpenSans-Regular',

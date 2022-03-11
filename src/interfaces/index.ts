@@ -8,3 +8,10 @@ export interface EntryCategory {
   value: string;
   type: EntryType;
 }
+
+export interface Expense {
+  label: string;
+  value: string;
+  displayDate: string;
+  storeDate: string;
+}

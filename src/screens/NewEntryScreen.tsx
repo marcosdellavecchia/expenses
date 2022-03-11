@@ -12,7 +12,9 @@ import {
   validateNumbers,
   removeLeadingZeros,
   getCurrentMonth,
+  getCurrentWeekDay,
   getCurrentYear,
+  getCurrentMonthDay,
 } from '../utils';
 import { CategoryModal } from '../components/CategoryModal';
 import { Spacer } from '../components/Spacer';
@@ -39,6 +41,8 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   const [category, setCategory] = useState(entryCategories[0]);
   const [isModalVisible, setModalVisible] = useState(false);
 
+  const currentWeekDay = getCurrentWeekDay();
+  const currentMonthDay = getCurrentMonthDay();
   const currentMonth = getCurrentMonth();
   const currentYear = getCurrentYear();
 
@@ -61,17 +65,12 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
     const entry = await AsyncStorage.getItem(STORAGE_ITEM_NAME);
     const n = entry ? JSON.parse(entry) : [];
 
-    category.type !== EntryType.INCOME
-      ? n.unshift([
-          category.label,
-          -inputValue,
-          `${currentMonth}-${currentYear}`,
-        ])
-      : n.unshift([
-          category.label,
-          inputValue,
-          `${currentMonth}-${currentYear}`,
-        ]);
+    n.unshift({
+      label: category.label,
+      value: category.type === EntryType.INCOME ? inputValue : -inputValue,
+      displayDate: `${currentWeekDay} ${currentMonthDay} de ${currentMonth}`,
+      storeDate: `${currentMonth}-${currentYear}`,
+    });
 
     await AsyncStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(n)).then(() =>
       Navigation.pop(componentId),

@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { Expense } from '../interfaces';
 import { Colors } from '../theme/colors';
 import { getExpensesBalance, formatToCurrency } from '../utils';
 
@@ -9,7 +10,7 @@ import { getExpensesBalance, formatToCurrency } from '../utils';
  */
 
 interface CurrentBalanceProps {
-  expenses: string[];
+  expenses: Expense[];
   currentMonth: string;
 }
 
