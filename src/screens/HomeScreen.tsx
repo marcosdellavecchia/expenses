@@ -64,7 +64,13 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
     });
   };
 
-  const removeExpenses = async (item: any) => {
+  const expensesByDate = expenses.reduce(function (r, a: Expense) {
+    r[a.displayDate] = r[a.displayDate] || [];
+    r[a.displayDate].push(a);
+    return r;
+  }, Object.create(null));
+
+  const removeExpenses = async (item: Expense) => {
     const newExpenses = await expenses.filter(expense => expense !== item);
     await AsyncStorage.setItem(
       STORAGE_ITEM_NAME,
@@ -74,12 +80,15 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
 
   const renderExpenses = ({ item }: any) => (
     <>
-      {true && <Text style={styles.dateText}>{item.displayDate}</Text>}
-      <TouchableOpacity
-        style={styles.listTextContainer}
-        onLongPress={() => showRemoveAlert(item)}>
-        <Text style={styles.listText}>{formatExpenseDetail(item)}</Text>
-      </TouchableOpacity>
+      <Text style={styles.dateText}>{item[0].displayDate}</Text>
+      {item.map((item: Expense, index: number) => (
+        <TouchableOpacity
+          style={styles.listTextContainer}
+          onLongPress={() => showRemoveAlert(item)}
+          key={index}>
+          <Text style={styles.listText}>{formatExpenseDetail(item)}</Text>
+        </TouchableOpacity>
+      ))}
     </>
   );
 
@@ -110,7 +119,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
           </View>
           <View style={styles.flatListContainer}>
             <FlatList
-              data={expenses}
+              data={Object.values(expensesByDate)}
               renderItem={renderExpenses}
               keyExtractor={(item, index) => index.toString()}
               ItemSeparatorComponent={Separator}
