@@ -13,7 +13,6 @@ export const Separator: FunctionComponent = () => (
 
 const styles = StyleSheet.create({
   separator: {
-    marginTop: 5,
     marginBottom: 5,
     height: 1,
     width: '100%',
