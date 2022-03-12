@@ -4,8 +4,11 @@ export const validateNumbers = (text: string) => text.replace(/[^.0-9]/g, '');
 
 export const removeLeadingZeros = (text: string) => text.replace(/^0+/, '');
 
-export const formatToCurrency = (amount: number) =>
-  '$' + amount.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+export const formatToCurrency = (amount: string) =>
+  '$' +
+  Number(amount)
+    .toFixed(2)
+    .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 
 export const getExpensesBalance = (expenses: Expense[]) => {
   const expenseNumbers = expenses.map(item => item.value);
@@ -15,16 +18,6 @@ export const getExpensesBalance = (expenses: Expense[]) => {
   );
   return expenseNumbersSum;
 };
-
-export const formatExpenseDetail = (expense: Expense): string => {
-  const formattedAmount = formatToCurrency(Number(expense.value));
-  const formattedCategory = expense.label;
-
-  return formattedCategory + '  ' + formattedAmount;
-};
-
-export const replaceSpaceWithLinebreak = (text: string) =>
-  text.split(' ').join('\n');
 
 export const getCurrentWeekDay = (): any => {
   const weekdayNames = [

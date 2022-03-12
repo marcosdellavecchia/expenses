@@ -18,7 +18,7 @@ import { Colors } from '../theme/colors';
 import { pushScreenVertically } from '../navigation/helpers';
 import { EmptyMessage } from '../components/EmptyMessage';
 import { CurrentBalance } from '../components/CurrentBalance';
-import { formatExpenseDetail, getCurrentMonth, getCurrentYear } from '../utils';
+import { formatToCurrency, getCurrentMonth, getCurrentYear } from '../utils';
 import { STORAGE_ITEM_NAME } from '../data';
 import { Expense } from '../interfaces';
 
@@ -81,12 +81,15 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
   const renderExpenses = ({ item }: any) => (
     <>
       <Text style={styles.dateText}>{item[0].displayDate}</Text>
+      <Separator />
       {item.map((item: Expense, index: number) => (
         <TouchableOpacity
           style={styles.listTextContainer}
           onLongPress={() => showRemoveAlert(item)}
           key={index}>
-          <Text style={styles.listText}>{formatExpenseDetail(item)}</Text>
+          <Text style={styles.listIcon}>{item.icon}</Text>
+          <Text style={styles.listLabel}>{item.label}</Text>
+          <Text style={styles.listValue}>{formatToCurrency(item.value)}</Text>
         </TouchableOpacity>
       ))}
     </>
@@ -122,7 +125,6 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
               data={Object.values(expensesByDate)}
               renderItem={renderExpenses}
               keyExtractor={(item, index) => index.toString()}
-              ItemSeparatorComponent={Separator}
               initialNumToRender={15}
             />
           </View>
@@ -163,6 +165,9 @@ const styles = StyleSheet.create({
   },
   listTextContainer: {
     width: SCREEN_WIDTH * 0.9,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   dateText: {
     fontFamily: 'OpenSans-Regular',
@@ -171,9 +176,28 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
     color: `${Colors.GRAY}`,
   },
-  listText: {
+  listIcon: {
+    width: '10%',
     fontFamily: 'OpenSans-Regular',
-    fontSize: 16,
+    fontSize: 19,
+    textAlign: 'center',
+    paddingTop: 8,
+    paddingBottom: 8,
+    color: `${Colors.WHITE}`,
+  },
+  listLabel: {
+    width: '40%',
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 17,
+    paddingTop: 8,
+    paddingBottom: 8,
+    color: `${Colors.WHITE}`,
+  },
+  listValue: {
+    width: '40%',
+    fontFamily: 'OpenSans-Regular',
+    fontSize: 17,
+    textAlign: 'right',
     paddingTop: 8,
     paddingBottom: 8,
     color: `${Colors.WHITE}`,

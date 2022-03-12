@@ -13,8 +13,8 @@ export const Separator: FunctionComponent = () => (
 
 const styles = StyleSheet.create({
   separator: {
-    marginTop: 1,
-    marginBottom: 1,
+    marginTop: 5,
+    marginBottom: 5,
     height: 1,
     width: '100%',
     backgroundColor: `${Colors.DARK_GRAY}`,

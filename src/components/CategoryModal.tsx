@@ -12,7 +12,6 @@ import Modal from 'react-native-modal';
 import { Colors } from '../theme/colors';
 import { EntryCategory, EntryType } from '../interfaces';
 import { Spacer } from './Spacer';
-import { replaceSpaceWithLinebreak } from '../utils';
 
 /*
  * Constants
@@ -61,8 +60,11 @@ export const CategoryModal: FunctionComponent<CategoryModalProps> = ({
                     style={styles.categoryItemsContainer}
                     key={index}
                     onPress={() => handleCategoryChange(category)}>
-                    <Text style={styles.categoryItemsText} numberOfLines={2}>
-                      {replaceSpaceWithLinebreak(category.label)}
+                    <Text style={styles.categoryItemsText}>
+                      {category.icon}
+                    </Text>
+                    <Text style={styles.categoryItemsText} numberOfLines={1}>
+                      {category.label}
                     </Text>
                   </TouchableOpacity>
                 ))}
@@ -79,8 +81,11 @@ export const CategoryModal: FunctionComponent<CategoryModalProps> = ({
                     style={styles.categoryItemsContainer}
                     key={index}
                     onPress={() => handleCategoryChange(category)}>
-                    <Text style={styles.categoryItemsText} numberOfLines={2}>
-                      {replaceSpaceWithLinebreak(category.label)}
+                    <Text style={styles.categoryItemsText}>
+                      {category.icon}
+                    </Text>
+                    <Text style={styles.categoryItemsText} numberOfLines={1}>
+                      {category.label}
                     </Text>
                   </TouchableOpacity>
                 ))}
@@ -117,6 +122,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   categoryItemsContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     width: 78,
     height: 60,
     margin: 5,

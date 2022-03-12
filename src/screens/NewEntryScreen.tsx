@@ -66,6 +66,7 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
     const n = entry ? JSON.parse(entry) : [];
 
     n.unshift({
+      icon: category.icon,
       label: category.label,
       value: category.type === EntryType.INCOME ? inputValue : -inputValue,
       displayDate: `${currentWeekDay} ${currentMonthDay} de ${currentMonth}`,
@@ -93,7 +94,9 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
       />
       <Spacer size="l" />
       <TouchableOpacity onPress={toggleModal}>
-        <Text style={styles.categoryText}>{category.label}</Text>
+        <Text style={styles.categoryText}>
+          {category.icon} {category.label}
+        </Text>
       </TouchableOpacity>
       <Spacer />
       <TouchableOpacity style={styles.saveContainer} onPress={handleSubmit}>
