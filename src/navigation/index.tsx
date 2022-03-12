@@ -5,6 +5,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 import HomeScreen from '../screens/HomeScreen';
 import NewEntryScreen from '../screens/NewEntryScreen';
 import { Colors } from '../theme/colors';
+import { pushScreenVertically } from './helpers';
 
 export const registerScreens = (): void => {
   Navigation.registerComponent('Settings', () => {
@@ -17,6 +18,12 @@ export const registerScreens = (): void => {
     return withNavigationProvider(NewEntryScreen);
   });
 };
+
+Navigation.events().registerBottomTabPressedListener(({ tabIndex }) => {
+  if (tabIndex === 1) {
+    pushScreenVertically('Home', 'NewEntry');
+  }
+});
 
 export const startApp = (): void => {
   Navigation.setRoot({
@@ -38,6 +45,31 @@ export const startApp = (): void => {
               options: {
                 bottomTab: {
                   icon: require('../assets/images/home-tab-icon.png'),
+                  iconColor: `${Colors.GRAY}`,
+                  selectedIconColor: `${Colors.WHITE}`,
+                },
+              },
+            },
+          },
+          {
+            stack: {
+              id: 'NewEntry',
+              children: [
+                {
+                  component: {
+                    id: 'NewEntry',
+                    name: 'NewEntry',
+                  },
+                },
+              ],
+              options: {
+                bottomTab: {
+                  icon: require('../assets/images/add.png'),
+                  iconInsets: {
+                    bottom: 5,
+                  },
+                  iconColor: `${Colors.WHITE}`,
+                  selectTabOnPress: false,
                 },
               },
             },
@@ -56,6 +88,8 @@ export const startApp = (): void => {
               options: {
                 bottomTab: {
                   icon: require('../assets/images/settings-tab-icon.png'),
+                  iconColor: `${Colors.GRAY}`,
+                  selectedIconColor: `${Colors.WHITE}`,
                 },
               },
             },
@@ -79,10 +113,6 @@ export const setDefaultNavigationOptions = (): void => {
       borderWidth: 1,
       borderColor: `${Colors.DARK_GRAY}`,
       elevation: 50,
-    },
-    bottomTab: {
-      iconColor: `${Colors.GRAY}`,
-      selectedIconColor: `${Colors.WHITE}`,
     },
   });
 };

@@ -13,9 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks';
 
 import { Separator } from '../components/Separator';
-import PlusButtonSvg from '../assets/images/plus-button.svg';
 import { Colors } from '../theme/colors';
-import { pushScreenVertically } from '../navigation/helpers';
 import { EmptyMessage } from '../components/EmptyMessage';
 import { CurrentBalance } from '../components/CurrentBalance';
 import { formatToCurrency, getCurrentMonth, getCurrentYear } from '../utils';
@@ -43,13 +41,10 @@ interface HomeScreenProps {
  * Home Screen
  */
 
-const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
-  componentId,
-}) => {
+const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = () => {
   useNavigationComponentDidAppear(() => {
     getExpenses();
   });
-
   const [expenses, setExpenses] = useState([]);
 
   const getExpenses = () => {
@@ -95,9 +90,6 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
     </>
   );
 
-  const handleNewEntryNavigation = () =>
-    pushScreenVertically(componentId, 'NewEntry');
-
   const showRemoveAlert = (item: any) =>
     Alert.alert('Eliminar', '¿Deseas eliminar este item?', [
       {
@@ -130,13 +122,6 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = ({
           </View>
         </>
       )}
-      <View style={styles.roundButtonContainer}>
-        <TouchableOpacity
-          accessibilityLabel="Add new entry"
-          onPress={handleNewEntryNavigation}>
-          <PlusButtonSvg width={45} height={45} color={Colors.WHITE} />
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
@@ -147,11 +132,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: `${Colors.BLACK}`,
-  },
-  roundButtonContainer: {
-    position: 'absolute',
-    bottom: '4%',
-    right: '5%',
   },
   flatListContainer: {
     position: 'absolute',
