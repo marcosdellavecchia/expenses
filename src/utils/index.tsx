@@ -4,13 +4,13 @@ export const validateNumbers = (text: string) => text.replace(/[^.0-9]/g, '');
 
 export const removeLeadingZeros = (text: string) => text.replace(/^0+/, '');
 
-export const formatToCurrency = (amount: string) =>
+export const formatToCurrency = (amount: any): string =>
   '$' +
   Number(amount)
     .toFixed(2)
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 
-export const getExpensesBalance = (expenses: Expense[]) => {
+export const getExpensesBalance = (expenses: Expense[]): number => {
   const expenseNumbers = expenses.map(item => item.value);
   const expenseNumbersSum = expenseNumbers.reduce(
     (a, b) => Number(a) + Number(b),

@@ -35,8 +35,8 @@ export const CurrentBalance: FunctionComponent<CurrentBalanceProps> = ({
 
 const styles = StyleSheet.create({
   balanceContainer: {
-    marginTop: 80,
-    marginBottom: 80,
+    marginTop: 90,
+    marginBottom: 90,
   },
   balanceText: {
     fontFamily: 'OpenSans-Regular',
