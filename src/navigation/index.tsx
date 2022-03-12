@@ -64,9 +64,10 @@ export const startApp = (): void => {
               ],
               options: {
                 bottomTab: {
-                  icon: require('../assets/images/add.png'),
+                  icon: require('../assets/images/add-tab-icon.png'),
                   iconInsets: {
-                    bottom: 5,
+                    top: 90,
+                    bottom: 98,
                   },
                   iconColor: `${Colors.WHITE}`,
                   selectTabOnPress: false,
