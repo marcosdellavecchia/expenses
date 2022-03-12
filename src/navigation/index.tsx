@@ -53,18 +53,11 @@ export const startApp = (): void => {
           },
           {
             stack: {
-              id: 'NewEntry',
-              children: [
-                {
-                  component: {
-                    id: 'NewEntry',
-                    name: 'NewEntry',
-                  },
-                },
-              ],
               options: {
                 bottomTab: {
                   icon: require('../assets/images/add-tab-icon.png'),
+                  iconWidth: 85,
+                  iconHeight: 85,
                   iconInsets: {
                     top: 90,
                     bottom: 98,
