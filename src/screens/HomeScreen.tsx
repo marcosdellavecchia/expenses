@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import { NavigationFunctionComponent } from 'react-native-navigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks';
 
 import { Separator } from '../components/Separator';
 import { Colors } from '../theme/colors';
@@ -42,10 +41,11 @@ interface HomeScreenProps {
  */
 
 const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = () => {
-  useNavigationComponentDidAppear(() => {
-    getExpenses();
-  });
   const [expenses, setExpenses] = useState([]);
+
+  useEffect(() => {
+    getExpenses();
+  }, [expenses]);
 
   const getExpenses = () => {
     AsyncStorage.getItem(STORAGE_ITEM_NAME).then(expenses => {

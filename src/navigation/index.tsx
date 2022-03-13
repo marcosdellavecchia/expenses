@@ -5,14 +5,13 @@ import SettingsScreen from '../screens/SettingsScreen';
 import HomeScreen from '../screens/HomeScreen';
 import NewEntryScreen from '../screens/NewEntryScreen';
 import { Colors } from '../theme/colors';
-import { pushScreenVertically } from './helpers';
 
 export const registerScreens = (): void => {
-  Navigation.registerComponent('Settings', () => {
-    return withNavigationProvider(SettingsScreen);
-  });
   Navigation.registerComponent('Home', () => {
     return withNavigationProvider(HomeScreen);
+  });
+  Navigation.registerComponent('Settings', () => {
+    return withNavigationProvider(SettingsScreen);
   });
   Navigation.registerComponent('NewEntry', () => {
     return withNavigationProvider(NewEntryScreen);
@@ -21,7 +20,17 @@ export const registerScreens = (): void => {
 
 Navigation.events().registerBottomTabPressedListener(({ tabIndex }) => {
   if (tabIndex === 1) {
-    pushScreenVertically('Home', 'NewEntry');
+    Navigation.showModal({
+      stack: {
+        children: [
+          {
+            component: {
+              name: 'NewEntry',
+            },
+          },
+        ],
+      },
+    });
   }
 });
 

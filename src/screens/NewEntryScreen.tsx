@@ -7,6 +7,7 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { NumberInput } from '../components/NumberInput';
+import CloseIconSvg from '../assets/images/close-icon.svg';
 import { Colors } from '../theme/colors';
 import {
   validateNumbers,
@@ -74,7 +75,7 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
     });
 
     await AsyncStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(n)).then(() =>
-      Navigation.pop(componentId),
+      Navigation.dismissModal(componentId),
     );
   };
 
@@ -87,6 +88,11 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
 
   return (
     <View style={styles.screen}>
+      <TouchableOpacity
+        style={styles.closeIconContainer}
+        onPress={() => Navigation.dismissModal(componentId)}>
+        <CloseIconSvg width={25} height={25} />
+      </TouchableOpacity>
       <NumberInput
         value={inputValue}
         onValueChange={onInputValueChange}
@@ -147,5 +153,10 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Regular',
     fontSize: 16,
     color: `${Colors.GRAY}`,
+  },
+  closeIconContainer: {
+    position: 'absolute',
+    top: 25,
+    left: 25,
   },
 });
