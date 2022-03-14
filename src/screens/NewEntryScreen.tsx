@@ -102,6 +102,7 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   return (
     <View style={styles.screen}>
       <TouchableOpacity
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         style={styles.closeIconContainer}
         onPress={() => Navigation.dismissModal(componentId)}>
         <CloseIconSvg width={25} height={25} />
@@ -169,7 +170,7 @@ const styles = StyleSheet.create({
   },
   closeIconContainer: {
     position: 'absolute',
-    top: 25,
-    left: 25,
+    top: 50,
+    left: 30,
   },
 });

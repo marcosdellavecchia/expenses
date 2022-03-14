@@ -1,4 +1,7 @@
-import { Navigation } from 'react-native-navigation';
+import {
+  Navigation,
+  OptionsModalPresentationStyle,
+} from 'react-native-navigation';
 import { withNavigationProvider } from 'react-native-navigation-hooks';
 
 import SettingsScreen from '../screens/SettingsScreen';
@@ -26,6 +29,10 @@ Navigation.events().registerBottomTabPressedListener(({ tabIndex }) => {
           {
             component: {
               name: 'NewEntry',
+              options: {
+                modalPresentationStyle:
+                  OptionsModalPresentationStyle.fullScreen,
+              },
             },
           },
         ],
