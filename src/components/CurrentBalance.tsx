@@ -43,11 +43,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 5,
     textAlign: 'center',
-    color: `${Colors.GRAY}`,
+    color: Colors.GRAY,
   },
   balanceNumber: {
     fontSize: 42,
     fontFamily: 'OpenSans-Bold',
-    color: `${Colors.WHITE}`,
+    color: Colors.WHITE,
   },
 });

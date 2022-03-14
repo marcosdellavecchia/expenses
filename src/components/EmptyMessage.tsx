@@ -22,16 +22,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: `${Colors.BLACK}`,
+    backgroundColor: Colors.BLACK,
   },
   h1: {
     fontFamily: 'OpenSans-Bold',
     fontSize: 26,
-    color: `${Colors.GRAY}`,
+    color: Colors.GRAY,
   },
   body1: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 16,
-    color: `${Colors.DARK_GRAY}`,
+    color: Colors.DARK_GRAY,
   },
 });

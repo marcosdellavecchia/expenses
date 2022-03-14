@@ -16,6 +16,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     height: 1,
     width: '100%',
-    backgroundColor: `${Colors.DARK_GRAY}`,
+    backgroundColor: Colors.DARK_GRAY,
   },
 });

@@ -62,7 +62,7 @@ const SettingsScreen: NavigationFunctionComponent<SettingsScreenProps> = ({
       <View style={styles.optionContainer}>
         <Text style={styles.body1}>Modo claro</Text>
         <Switch
-          trackColor={{ false: `${Colors.DARK_GRAY}`, true: '#81b0ff' }}
+          trackColor={{ false: Colors.DARK_GRAY, true: '#81b0ff' }}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSwitch}
           value={isLightThemeEnabled}
@@ -87,12 +87,12 @@ const styles = StyleSheet.create({
     paddingTop: 60,
     paddingLeft: 20,
     paddingRight: 20,
-    backgroundColor: `${Colors.BLACK}`,
+    backgroundColor: Colors.BLACK,
   },
   h1: {
     fontSize: 26,
     fontFamily: 'OpenSans-Bold',
-    color: `${Colors.GRAY}`,
+    color: Colors.GRAY,
   },
   optionContainer: {
     flexDirection: 'row',
@@ -103,13 +103,13 @@ const styles = StyleSheet.create({
     alignContent: 'flex-start',
     fontFamily: 'OpenSans-Regular',
     fontSize: 16,
-    color: `${Colors.WHITE}`,
+    color: Colors.WHITE,
   },
   disabled: {
     alignContent: 'flex-start',
     fontFamily: 'OpenSans-Regular',
     fontSize: 16,
-    color: `${Colors.DARK_GRAY}`,
+    color: Colors.DARK_GRAY,
   },
 });
 

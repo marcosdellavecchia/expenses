@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     fontFamily: 'OpenSans-Bold',
     textAlign: 'center',
     borderBottomWidth: 1,
-    borderBottomColor: `${Colors.WHITE}`,
-    color: `${Colors.WHITE}`,
+    borderBottomColor: Colors.WHITE,
+    color: Colors.WHITE,
     fontSize: 42,
   },
 });

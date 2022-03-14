@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: `${Colors.BLACK}`,
+    backgroundColor: Colors.BLACK,
   },
   flatListContainer: {
     position: 'absolute',
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingTop: 8,
     paddingBottom: 8,
-    color: `${Colors.GRAY}`,
+    color: Colors.GRAY,
   },
   listIcon: {
     width: '10%',
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 8,
     paddingBottom: 8,
-    color: `${Colors.WHITE}`,
+    color: Colors.WHITE,
   },
   listLabel: {
     width: '40%',
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     paddingTop: 8,
     paddingBottom: 8,
-    color: `${Colors.WHITE}`,
+    color: Colors.WHITE,
   },
   listValue: {
     width: '40%',
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     paddingTop: 8,
     paddingBottom: 8,
-    color: `${Colors.WHITE}`,
+    color: Colors.WHITE,
   },
 });
 

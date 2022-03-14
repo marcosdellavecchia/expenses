@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   roundButtonTouchable: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: `${Colors.WHITE}`,
+    backgroundColor: Colors.WHITE,
     margin: 10,
     borderRadius: 50,
     width: 35,
@@ -52,6 +52,6 @@ const styles = StyleSheet.create({
   roundButtonText: {
     fontFamily: 'OpenSans-Bold',
     fontSize: 26,
-    color: `${Colors.BLACK}`,
+    color: Colors.BLACK,
   },
 });

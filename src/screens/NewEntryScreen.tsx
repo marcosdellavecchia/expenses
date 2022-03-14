@@ -138,10 +138,10 @@ NewEntryScreen.options = {
   topBar: {
     title: {
       text: 'Cargar gasto',
-      color: `${Colors.WHITE}`,
+      color: Colors.WHITE,
     },
     background: {
-      color: `${Colors.BLACK}`,
+      color: Colors.BLACK,
     },
   },
 };
@@ -152,22 +152,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: '25%',
-    backgroundColor: `${Colors.BLACK}`,
+    backgroundColor: Colors.BLACK,
   },
   saveContainer: {
     padding: 10,
     borderRadius: 50,
-    backgroundColor: `${Colors.DARK_GRAY}`,
+    backgroundColor: Colors.DARK_GRAY,
   },
   saveText: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 16,
-    color: `${Colors.ALMOST_BLACK}`,
+    color: Colors.ALMOST_BLACK,
   },
   categoryText: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 16,
-    color: `${Colors.GRAY}`,
+    color: Colors.GRAY,
   },
   closeIconContainer: {
     position: 'absolute',

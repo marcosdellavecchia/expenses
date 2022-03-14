@@ -61,8 +61,8 @@ export const startApp = (): void => {
               options: {
                 bottomTab: {
                   icon: require('../assets/images/home-tab-icon.png'),
-                  iconColor: `${Colors.GRAY}`,
-                  selectedIconColor: `${Colors.WHITE}`,
+                  iconColor: Colors.GRAY,
+                  selectedIconColor: Colors.WHITE,
                 },
               },
             },
@@ -78,7 +78,7 @@ export const startApp = (): void => {
                     top: 90,
                     bottom: 98,
                   },
-                  iconColor: `${Colors.WHITE}`,
+                  iconColor: Colors.WHITE,
                   selectTabOnPress: false,
                 },
               },
@@ -98,8 +98,8 @@ export const startApp = (): void => {
               options: {
                 bottomTab: {
                   icon: require('../assets/images/settings-tab-icon.png'),
-                  iconColor: `${Colors.GRAY}`,
-                  selectedIconColor: `${Colors.WHITE}`,
+                  iconColor: Colors.GRAY,
+                  selectedIconColor: Colors.WHITE,
                 },
               },
             },
@@ -119,9 +119,9 @@ export const setDefaultNavigationOptions = (): void => {
       visible: false,
     },
     bottomTabs: {
-      backgroundColor: `${Colors.ALMOST_BLACK}`,
+      backgroundColor: Colors.ALMOST_BLACK,
       borderWidth: 1,
-      borderColor: `${Colors.DARK_GRAY}`,
+      borderColor: Colors.DARK_GRAY,
       elevation: 50,
     },
   });

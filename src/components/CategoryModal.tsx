@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH * 0.95,
     height: SCREEN_HEIGHT * 0.3,
     borderRadius: 10,
-    backgroundColor: `${Colors.ALMOST_BLACK}`,
+    backgroundColor: Colors.ALMOST_BLACK,
   },
   categoryScrollView: {
     marginTop: 12,
@@ -134,14 +134,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     padding: 5,
-    color: `${Colors.GRAY}`,
+    color: Colors.GRAY,
   },
   categoryTitle: {
     fontFamily: 'OpenSans-Regular',
     fontSize: 14,
     textAlign: 'center',
     paddingBottom: 8,
-    color: `${Colors.DARK_GRAY}`,
+    color: Colors.DARK_GRAY,
     textTransform: 'uppercase',
   },
 });
