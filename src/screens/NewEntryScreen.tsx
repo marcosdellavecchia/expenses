@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import {
   Navigation,
@@ -38,6 +38,10 @@ interface NewEntryScreenProps {
 const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   componentId,
 }) => {
+  useEffect(() => {
+    getLastSelectedExpenseCategory();
+  }, []);
+
   const [inputValue, setinputValue] = useState('');
   const [category, setCategory] = useState(entryCategories[0]);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -46,6 +50,15 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   const currentMonthDay = getCurrentMonthDay();
   const currentMonth = getCurrentMonth();
   const currentYear = getCurrentYear();
+
+  const getLastSelectedExpenseCategory = () => {
+    AsyncStorage.getItem(STORAGE_ITEM_NAME).then(expenses => {
+      const parsedExpenses = expenses ? JSON.parse(expenses) : [];
+      const lastCategoryIndex = parsedExpenses[0].index;
+
+      return setCategory(entryCategories[lastCategoryIndex]);
+    });
+  };
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -67,6 +80,7 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
     const n = entry ? JSON.parse(entry) : [];
 
     n.unshift({
+      index: entryCategories.indexOf(category),
       icon: category.icon,
       label: category.label,
       value: category.type === EntryType.INCOME ? inputValue : -inputValue,

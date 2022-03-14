@@ -6,7 +6,6 @@ export enum EntryType {
 export interface EntryCategory {
   icon: string;
   label: string;
-  value: string;
   type: EntryType;
 }
 

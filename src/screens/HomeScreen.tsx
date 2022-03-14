@@ -49,7 +49,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = () => {
 
   const getExpenses = () => {
     AsyncStorage.getItem(STORAGE_ITEM_NAME).then(expenses => {
-      const parsedExpenses = JSON.parse(expenses || '');
+      const parsedExpenses = expenses ? JSON.parse(expenses) : [];
       const currentMonthExpenses = parsedExpenses.filter(
         (expenses: Expense) =>
           expenses.storeDate === `${currentMonth}-${currentYear}`,
