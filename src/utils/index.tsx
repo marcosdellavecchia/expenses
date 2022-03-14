@@ -19,7 +19,7 @@ export const getExpensesBalance = (expenses: Expense[]): number => {
   return expenseNumbersSum;
 };
 
-export const getCurrentWeekDay = (): any => {
+const getCurrentWeekDay = (): any => {
   const weekdayNames = [
     'Domingo',
     'Lunes',
@@ -36,7 +36,7 @@ export const getCurrentWeekDay = (): any => {
   return weekdayNames[weekdayNumber];
 };
 
-export const getCurrentMonthDay = (): any => {
+const getCurrentMonthDay = (): any => {
   const date = new Date();
 
   return date.getDate();
@@ -64,4 +64,19 @@ export const getCurrentMonth = (): any => {
   return monthNames[monthNumber];
 };
 
-export const getCurrentYear = (): number => new Date().getFullYear();
+const getCurrentYear = (): number => new Date().getFullYear();
+
+export const getDisplayDate = (): string => {
+  const currentWeekDay = getCurrentWeekDay();
+  const currentMonthDay = getCurrentMonthDay();
+  const currentMonth = getCurrentMonth();
+
+  return `${currentWeekDay} ${currentMonthDay} de ${currentMonth}`;
+};
+
+export const getStoreDate = (): string => {
+  const currentMonth = getCurrentMonth();
+  const currentYear = getCurrentYear();
+
+  return `${currentMonth}-${currentYear}`;
+};

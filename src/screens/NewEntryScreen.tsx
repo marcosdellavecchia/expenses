@@ -12,10 +12,8 @@ import { Colors } from '../theme/colors';
 import {
   validateNumbers,
   removeLeadingZeros,
-  getCurrentMonth,
-  getCurrentWeekDay,
-  getCurrentYear,
-  getCurrentMonthDay,
+  getDisplayDate,
+  getStoreDate,
 } from '../utils';
 import { CategoryModal } from '../components/CategoryModal';
 import { Spacer } from '../components/Spacer';
@@ -23,6 +21,12 @@ import { entryCategories } from '../data';
 import { EntryCategory, EntryType } from '../interfaces';
 import { STORAGE_ITEM_NAME } from '../data';
 
+/*
+ * Constants
+ */
+
+const displayDate = getDisplayDate();
+const storeDate = getStoreDate();
 /*
  * Types
  */
@@ -45,11 +49,6 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   const [inputValue, setinputValue] = useState('');
   const [category, setCategory] = useState(entryCategories[0]);
   const [isModalVisible, setModalVisible] = useState(false);
-
-  const currentWeekDay = getCurrentWeekDay();
-  const currentMonthDay = getCurrentMonthDay();
-  const currentMonth = getCurrentMonth();
-  const currentYear = getCurrentYear();
 
   const getLastSelectedExpenseCategory = () => {
     AsyncStorage.getItem(STORAGE_ITEM_NAME).then(expenses => {
@@ -84,8 +83,8 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
       icon: category.icon,
       label: category.label,
       value: category.type === EntryType.INCOME ? inputValue : -inputValue,
-      displayDate: `${currentWeekDay} ${currentMonthDay} de ${currentMonth}`,
-      storeDate: `${currentMonth}-${currentYear}`,
+      displayDate,
+      storeDate,
     });
 
     await AsyncStorage.setItem(STORAGE_ITEM_NAME, JSON.stringify(n)).then(() =>

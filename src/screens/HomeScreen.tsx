@@ -15,7 +15,7 @@ import { Separator } from '../components/Separator';
 import { Colors } from '../theme/colors';
 import { EmptyMessage } from '../components/EmptyMessage';
 import { CurrentBalance } from '../components/CurrentBalance';
-import { formatToCurrency, getCurrentMonth, getCurrentYear } from '../utils';
+import { formatToCurrency, getStoreDate, getCurrentMonth } from '../utils';
 import { STORAGE_ITEM_NAME } from '../data';
 import { Expense } from '../interfaces';
 
@@ -24,9 +24,8 @@ import { Expense } from '../interfaces';
  */
 
 const SCREEN_WIDTH = Dimensions.get('screen').width;
-
+const storeDate = getStoreDate();
 const currentMonth = getCurrentMonth();
-const currentYear = getCurrentYear();
 
 /*
  * Types
@@ -51,8 +50,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = () => {
     AsyncStorage.getItem(STORAGE_ITEM_NAME).then(expenses => {
       const parsedExpenses = expenses ? JSON.parse(expenses) : [];
       const currentMonthExpenses = parsedExpenses.filter(
-        (expenses: Expense) =>
-          expenses.storeDate === `${currentMonth}-${currentYear}`,
+        (expenses: Expense) => expenses.storeDate === storeDate,
       );
 
       setExpenses(currentMonthExpenses);
