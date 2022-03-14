@@ -27,6 +27,7 @@ export const NumberInput: FunctionComponent<NumberInputProps> = ({
         onSubmitEditing={onSubmitEditing}
         textAlign="center"
         autoFocus
+        keyboardAppearance="dark"
       />
     </View>
   );
