@@ -11,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationFunctionComponent } from 'react-native-navigation';
 import RNRestart from 'react-native-restart';
 
+import I18n from '../../i18n';
 import { Spacer } from '../components/Spacer';
 import { Colors } from '../theme/colors';
 
@@ -39,44 +40,40 @@ const SettingsScreen: NavigationFunctionComponent<SettingsScreenProps> = ({
   };
 
   const showRemoveAlert = () =>
-    Alert.alert(
-      'Eliminar datos',
-      '¿Deseas eliminar por completo los datos almacenados?',
-      [
-        {
-          text: 'Cancelar',
-          style: 'cancel',
-        },
-        {
-          text: 'Eliminar',
-          style: 'destructive',
-          onPress: () => clearAsyncStorage(),
-        },
-      ],
-    );
+    Alert.alert(I18n.t('deleteAllData'), I18n.t('deleteAllDataDescription'), [
+      {
+        text: I18n.t('cancel'),
+        style: 'cancel',
+      },
+      {
+        text: I18n.t('delete'),
+        style: 'destructive',
+        onPress: () => clearAsyncStorage(),
+      },
+    ]);
 
   return (
     <View style={styles.screen}>
-      <Text style={styles.h1}>Configuración</Text>
+      <Text style={styles.h1}>{I18n.t('settings')}</Text>
       <Spacer />
       <View style={styles.optionContainer}>
-        <Text style={styles.body1}>Modo claro</Text>
+        <Text style={styles.body1}>{I18n.t('lightMode')}</Text>
         {/* <Switch
           trackColor={{ false: Colors.DARK_GRAY, true: '#81b0ff' }}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSwitch}
           value={isLightThemeEnabled}
         /> */}
-        <Text style={styles.disabled}>No disponible</Text>
+        <Text style={styles.disabled}>{I18n.t('notAvailable')}</Text>
       </View>
       <Spacer size="s" />
       <View style={styles.optionContainer}>
-        <Text style={styles.body1}>Símbolo de moneda</Text>
-        <Text style={styles.disabled}>No disponible</Text>
+        <Text style={styles.body1}>{I18n.t('currencySymbol')}</Text>
+        <Text style={styles.disabled}>{I18n.t('notAvailable')}</Text>
       </View>
       <Spacer size="s" />
       <TouchableOpacity onPress={showRemoveAlert}>
-        <Text style={styles.body1}>Eliminar datos</Text>
+        <Text style={styles.body1}>{I18n.t('deleteAllData')}</Text>
       </TouchableOpacity>
     </View>
   );

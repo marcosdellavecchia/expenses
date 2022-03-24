@@ -12,11 +12,17 @@ import { NavigationFunctionComponent } from 'react-native-navigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks';
 
+import I18n from '../../i18n';
 import { Separator } from '../components/Separator';
 import { Colors } from '../theme/colors';
 import { EmptyMessage } from '../components/EmptyMessage';
 import { CurrentBalance } from '../components/CurrentBalance';
-import { formatToCurrency, getStoreDate, getCurrentMonth } from '../utils';
+import {
+  formatToCurrency,
+  getStoreDate,
+  getCurrentMonth,
+  translateWeekDay,
+} from '../utils';
 import { STORAGE_ITEM_NAME } from '../data';
 import { Expense } from '../interfaces';
 
@@ -74,7 +80,13 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = () => {
 
   const renderExpenses = ({ item }: any) => (
     <>
-      <Text style={styles.dateText}>{item[0].displayDate}</Text>
+      <Text style={styles.dateText}>
+        {translateWeekDay(item[0].displayDate.weekday) +
+          ' - ' +
+          item[0].displayDate.day +
+          '/' +
+          item[0].displayDate.month}
+      </Text>
       <Separator />
       {item.map((item: Expense, index: number) => (
         <TouchableOpacity
@@ -82,7 +94,9 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = () => {
           onLongPress={() => showRemoveAlert(item)}
           key={index}>
           <Text style={styles.listIcon}>{item.icon}</Text>
-          <Text style={styles.listLabel}>{item.label}</Text>
+          <Text style={styles.listLabel}>
+            {I18n.t(`categories.${item.label}`)}
+          </Text>
           <Text style={styles.listValue}>{formatToCurrency(item.value)}</Text>
         </TouchableOpacity>
       ))}
@@ -90,18 +104,18 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = () => {
   );
 
   const showRemoveAlert = (item: any) =>
-    Alert.alert('Eliminar', '¿Deseas eliminar este item?', [
+    Alert.alert(I18n.t('delete'), I18n.t('deleteDescription'), [
       {
-        text: 'Cancelar',
+        text: I18n.t('cancel'),
         style: 'cancel',
       },
       {
-        text: 'Eliminar',
+        text: I18n.t('delete'),
         style: 'destructive',
         onPress: () => removeExpenses(item),
       },
     ]);
-
+  console.log(expenses);
   return (
     <View style={styles.screen}>
       {expenses.length === 0 ? (

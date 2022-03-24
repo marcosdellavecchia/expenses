@@ -1,86 +1,87 @@
 import { EntryType, EntryCategory } from '../interfaces';
+import I18n from '../../i18n';
 
 export const STORAGE_ITEM_NAME = 'EXPENSES';
 
 export const entryCategories: EntryCategory[] = [
   {
     icon: '🥑',
-    label: 'Comida',
+    label: 'food',
     type: EntryType.EXPENSE,
   },
   {
     icon: '👕',
-    label: 'Ropa',
+    label: 'clothes',
     type: EntryType.EXPENSE,
   },
   {
     icon: '💊',
-    label: 'Salud',
+    label: 'health',
     type: EntryType.EXPENSE,
   },
   {
     icon: '🚴',
-    label: 'Deporte',
+    label: 'sports',
     type: EntryType.EXPENSE,
   },
   {
     icon: '🪥',
-    label: 'Higiene',
+    label: 'hygiene',
     type: EntryType.EXPENSE,
   },
   {
     icon: '🚗',
-    label: 'Transporte',
+    label: 'transport',
     type: EntryType.EXPENSE,
   },
   {
     icon: '📚',
-    label: 'Educación',
+    label: 'education',
     type: EntryType.EXPENSE,
   },
   {
     icon: '🍿',
-    label: 'Entretenimiento',
+    label: 'entertainment',
     type: EntryType.EXPENSE,
   },
   {
     icon: '🍸',
-    label: 'Salidas',
+    label: 'goingOut',
     type: EntryType.EXPENSE,
   },
   {
     icon: '🎁',
-    label: 'Regalos',
+    label: 'gifts',
     type: EntryType.EXPENSE,
   },
   {
     icon: '🏠',
-    label: 'Hogar',
+    label: 'home',
     type: EntryType.EXPENSE,
   },
   {
     icon: '🧾',
-    label: 'Facturas',
+    label: 'bills',
     type: EntryType.EXPENSE,
   },
   {
     icon: '💸',
-    label: 'Otros',
+    label: 'other',
     type: EntryType.EXPENSE,
   },
   {
     icon: '💰',
-    label: 'Sueldo',
+    label: 'salary',
     type: EntryType.INCOME,
   },
   {
     icon: '💰',
-    label: 'Depósitos',
+    label: 'deposits',
     type: EntryType.INCOME,
   },
   {
     icon: '💰',
-    label: 'Otros',
+    label: 'other',
     type: EntryType.INCOME,
   },
 ];

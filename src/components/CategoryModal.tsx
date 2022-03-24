@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 
+import I18n from '../../i18n';
 import { Colors } from '../theme/colors';
 import { EntryCategory, EntryType } from '../interfaces';
 import { Spacer } from './Spacer';
@@ -51,7 +52,7 @@ export const CategoryModal: FunctionComponent<CategoryModalProps> = ({
       <Modal isVisible={isVisible} onBackdropPress={toggleModal}>
         <View style={styles.screen}>
           <ScrollView style={styles.categoryScrollView}>
-            <Text style={styles.categoryTitle}>Gastos</Text>
+            <Text style={styles.categoryTitle}>{I18n.t('expenses')}</Text>
             <View style={styles.categoryTouchableContainer}>
               {categories
                 .filter(category => category.type === EntryType.EXPENSE)
@@ -64,7 +65,7 @@ export const CategoryModal: FunctionComponent<CategoryModalProps> = ({
                       {category.icon}
                     </Text>
                     <Text style={styles.categoryItemsText} numberOfLines={1}>
-                      {category.label}
+                      {I18n.t(`categories.${category.label}`)}
                     </Text>
                   </TouchableOpacity>
                 ))}
@@ -72,7 +73,7 @@ export const CategoryModal: FunctionComponent<CategoryModalProps> = ({
 
             <Spacer size="xs" />
 
-            <Text style={styles.categoryTitle}>Ingresos</Text>
+            <Text style={styles.categoryTitle}>{I18n.t('incomes')}</Text>
             <View style={styles.categoryTouchableContainer}>
               {categories
                 .filter(category => category.type === EntryType.INCOME)
@@ -85,7 +86,7 @@ export const CategoryModal: FunctionComponent<CategoryModalProps> = ({
                       {category.icon}
                     </Text>
                     <Text style={styles.categoryItemsText} numberOfLines={1}>
-                      {category.label}
+                      {I18n.t(`categories.${category.label}`)}
                     </Text>
                   </TouchableOpacity>
                 ))}

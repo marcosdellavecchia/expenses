@@ -1,4 +1,5 @@
 import { Expense } from '../interfaces';
+import I18n from '../../i18n';
 
 export const validateNumbers = (text: string) => text.replace(/[^.0-9]/g, '');
 
@@ -19,43 +20,34 @@ export const getExpensesBalance = (expenses: Expense[]): number => {
   return expenseNumbersSum;
 };
 
-const getCurrentWeekDay = (): any => {
+export const translateWeekDay = (weekdayNumber: number): any => {
   const weekdayNames = [
-    'Domingo',
-    'Lunes',
-    'Martes',
-    'Miércoles',
-    'Jueves',
-    'Viernes',
-    'Sábado',
+    I18n.t('weekdays.sunday'),
+    I18n.t('weekdays.monday'),
+    I18n.t('weekdays.tuesday'),
+    I18n.t('weekdays.wednesday'),
+    I18n.t('weekdays.thursday'),
+    I18n.t('weekdays.friday'),
+    I18n.t('weekdays.saturday'),
   ];
-
-  const date = new Date();
-  const weekdayNumber = date.getDay();
 
   return weekdayNames[weekdayNumber];
 };
 
-const getCurrentMonthDay = (): any => {
-  const date = new Date();
-
-  return date.getDate();
-};
-
 export const getCurrentMonth = (): any => {
   const monthNames = [
-    'Enero',
-    'Febrero',
-    'Marzo',
-    'Abril',
-    'Mayo',
-    'Junio',
-    'Julio',
-    'Agosto',
-    'Septiembre',
-    'Octubre',
-    'Noviembre',
-    'Diciembre',
+    I18n.t('months.january'),
+    I18n.t('months.february'),
+    I18n.t('months.march'),
+    I18n.t('months.april'),
+    I18n.t('months.may'),
+    I18n.t('months.june'),
+    I18n.t('months.july'),
+    I18n.t('months.august'),
+    I18n.t('months.september'),
+    I18n.t('months.october'),
+    I18n.t('months.november'),
+    I18n.t('months.december'),
   ];
 
   const date = new Date();
@@ -64,19 +56,24 @@ export const getCurrentMonth = (): any => {
   return monthNames[monthNumber];
 };
 
-const getCurrentYear = (): number => new Date().getFullYear();
+export const getDisplayDate = () => {
+  const dateObj = new Date();
 
-export const getDisplayDate = (): string => {
-  const currentWeekDay = getCurrentWeekDay();
-  const currentMonthDay = getCurrentMonthDay();
-  const currentMonth = getCurrentMonth();
+  const weekday = dateObj.getDay();
+  const month = ('0' + (dateObj.getMonth() + 1)).slice(-2);
+  const day = ('0' + dateObj.getDate()).slice(-2);
 
-  return `${currentWeekDay} ${currentMonthDay} de ${currentMonth}`;
+  return {
+    weekday,
+    month,
+    day,
+  };
 };
 
 export const getStoreDate = (): string => {
-  const currentMonth = getCurrentMonth();
-  const currentYear = getCurrentYear();
+  var dateObj = new Date();
+  var month = dateObj.getUTCMonth() + 1;
+  var year = dateObj.getUTCFullYear();
 
-  return `${currentMonth}-${currentYear}`;
+  return month + '/' + year;
 };

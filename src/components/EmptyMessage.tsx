@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
+import I18n from '../../i18n';
 import EmptyBoxSvg from '../assets/images/empty-box.svg';
 import { Colors } from '../theme/colors';
 import { Spacer } from './Spacer';
@@ -9,11 +10,9 @@ export const EmptyMessage: FunctionComponent = () => (
   <>
     <EmptyBoxSvg width={125} height={125} color={Colors.DARK_GRAY} />
     <Spacer />
-    <Text style={styles.h1}>Cargá tu primer gasto</Text>
+    <Text style={styles.h1}>{I18n.t('loadFirstExpense')}</Text>
     <Spacer size="xs" />
-    <Text style={styles.body1}>
-      Presioná el botón en la esquina inferior derecha
-    </Text>
+    <Text style={styles.body1}>{I18n.t('pressButtonBelow')}</Text>
   </>
 );
 

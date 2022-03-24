@@ -6,14 +6,15 @@ import {
 } from 'react-native-navigation';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import I18n from '../../i18n';
 import { NumberInput } from '../components/NumberInput';
 import CloseIconSvg from '../assets/images/close-icon.svg';
 import { Colors } from '../theme/colors';
 import {
   validateNumbers,
   removeLeadingZeros,
-  getDisplayDate,
   getStoreDate,
+  getDisplayDate,
 } from '../utils';
 import { CategoryModal } from '../components/CategoryModal';
 import { Spacer } from '../components/Spacer';
@@ -25,8 +26,9 @@ import { STORAGE_ITEM_NAME } from '../data';
  * Constants
  */
 
-const displayDate = getDisplayDate();
 const storeDate = getStoreDate();
+const displayDate = getDisplayDate();
+
 /*
  * Types
  */
@@ -65,7 +67,6 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
 
   const handleCategoryChange = (selectedCategory: EntryCategory) => {
     setCategory(selectedCategory);
-    console.log(selectedCategory);
   };
 
   const onInputValueChange = (text: string) => {
@@ -115,12 +116,16 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
       <Spacer size="l" />
       <TouchableOpacity onPress={toggleModal}>
         <Text style={styles.categoryText}>
-          {category.icon} {category.label}
+          {category.icon} {I18n.t(`categories.${category.label}`)}
         </Text>
       </TouchableOpacity>
       <Spacer />
       <TouchableOpacity style={styles.saveContainer} onPress={handleSubmit}>
-        <Text style={styles.saveText}>Guardar</Text>
+        <Text style={styles.saveText}>
+          {category.type === EntryType.EXPENSE
+            ? I18n.t('addExpense')
+            : I18n.t('addIncome')}
+        </Text>
       </TouchableOpacity>
       <CategoryModal
         isVisible={isModalVisible}
@@ -133,18 +138,6 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
 };
 
 export default NewEntryScreen;
-
-NewEntryScreen.options = {
-  topBar: {
-    title: {
-      text: 'Cargar gasto',
-      color: Colors.WHITE,
-    },
-    background: {
-      color: Colors.BLACK,
-    },
-  },
-};
 
 const styles = StyleSheet.create({
   screen: {
