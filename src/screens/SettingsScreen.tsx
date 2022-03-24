@@ -61,12 +61,13 @@ const SettingsScreen: NavigationFunctionComponent<SettingsScreenProps> = ({
       <Spacer />
       <View style={styles.optionContainer}>
         <Text style={styles.body1}>Modo claro</Text>
-        <Switch
+        {/* <Switch
           trackColor={{ false: Colors.DARK_GRAY, true: '#81b0ff' }}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSwitch}
           value={isLightThemeEnabled}
-        />
+        /> */}
+        <Text style={styles.disabled}>No disponible</Text>
       </View>
       <Spacer size="s" />
       <View style={styles.optionContainer}>
