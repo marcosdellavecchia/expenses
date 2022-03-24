@@ -1,5 +1,5 @@
 export default {
-  balance: '{{currentMonth}} Balance',
+  balance: 'Balance of {{currentMonth}}',
   loadFirstExpense: 'Add your first expense',
   pressButtonBelow: 'Press the button below',
   addExpense: 'Add expense',
