@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -32,6 +32,12 @@ const SettingsScreen: NavigationFunctionComponent<SettingsScreenProps> = ({
 }) => {
   const [isLightThemeEnabled, setIsLightThemeEnabled] = useState(false);
 
+  useEffect(() => {
+    if (isLightThemeEnabled) {
+      showNotAvailableAlert();
+    }
+  }, [isLightThemeEnabled]);
+
   const toggleSwitch = () =>
     setIsLightThemeEnabled(previousState => !previousState);
 
@@ -52,19 +58,27 @@ const SettingsScreen: NavigationFunctionComponent<SettingsScreenProps> = ({
       },
     ]);
 
+  const showNotAvailableAlert = () =>
+    Alert.alert(I18n.t('notAvailable'), I18n.t('lightModeNotAvailable'), [
+      {
+        text: 'Ok',
+        style: 'default',
+        onPress: () => setIsLightThemeEnabled(false),
+      },
+    ]);
+
   return (
     <View style={styles.screen}>
       <Text style={styles.h1}>{I18n.t('settings')}</Text>
       <Spacer />
       <View style={styles.optionContainer}>
         <Text style={styles.body1}>{I18n.t('lightMode')}</Text>
-        {/* <Switch
+        <Switch
           trackColor={{ false: Colors.DARK_GRAY, true: '#81b0ff' }}
           ios_backgroundColor="#3e3e3e"
           onValueChange={toggleSwitch}
           value={isLightThemeEnabled}
-        /> */}
-        <Text style={styles.disabled}>{I18n.t('notAvailable')}</Text>
+        />
       </View>
       <Spacer size="s" />
       <View style={styles.optionContainer}>

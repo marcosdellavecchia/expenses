@@ -16,6 +16,7 @@ export default {
   deleteAllData: 'Delete data',
   deleteAllDataDescription:
     'Are you sure you want to completely remove stored data?',
+  lightModeNotAvailable: 'Light mode is not available yet',
   categories: {
     food: 'Food',
     clothes: 'Clothes',

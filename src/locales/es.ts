@@ -16,6 +16,7 @@ export default {
   deleteAllData: 'Eliminar datos',
   deleteAllDataDescription:
     '¿Deseas eliminar por completo los datos almacenados?',
+  lightModeNotAvailable: 'El modo claro no está disponible todavía.',
   categories: {
     food: 'Comida',
     clothes: 'Ropa',
