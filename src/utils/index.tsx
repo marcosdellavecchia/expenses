@@ -63,11 +63,7 @@ export const getDisplayDate = () => {
   const month = ('0' + (dateObj.getMonth() + 1)).slice(-2);
   const day = ('0' + dateObj.getDate()).slice(-2);
 
-  return {
-    weekday,
-    month,
-    day,
-  };
+  return `${translateWeekDay(weekday)} - ${day}/${month}`;
 };
 
 export const getStoreDate = (): string => {

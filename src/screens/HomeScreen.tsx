@@ -17,12 +17,7 @@ import { Separator } from '../components/Separator';
 import { Colors } from '../theme/colors';
 import { EmptyMessage } from '../components/EmptyMessage';
 import { CurrentBalance } from '../components/CurrentBalance';
-import {
-  formatToCurrency,
-  getStoreDate,
-  getCurrentMonth,
-  translateWeekDay,
-} from '../utils';
+import { formatToCurrency, getStoreDate, getCurrentMonth } from '../utils';
 import { STORAGE_ITEM_NAME } from '../data';
 import { Expense } from '../interfaces';
 
@@ -80,13 +75,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = () => {
 
   const renderExpenses = ({ item }: any) => (
     <>
-      <Text style={styles.dateText}>
-        {translateWeekDay(item[0].displayDate.weekday) +
-          ' - ' +
-          item[0].displayDate.day +
-          '/' +
-          item[0].displayDate.month}
-      </Text>
+      <Text style={styles.dateText}>{item[0].displayDate}</Text>
       <Separator />
       {item.map((item: Expense, index: number) => (
         <TouchableOpacity
@@ -115,7 +104,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = () => {
         onPress: () => removeExpenses(item),
       },
     ]);
-  console.log(expenses);
+
   return (
     <View style={styles.screen}>
       {expenses.length === 0 ? (
