@@ -1,7 +1,7 @@
 export default {
   balance: 'Balance of {{currentMonth}}',
-  loadFirstExpense: 'Add your first expense',
-  pressButtonBelow: 'Press the button below',
+  loadFirstExpense: 'No expenses found for {{currentMonth}}',
+  pressButtonBelow: 'Add expenses or income by pressing the button below',
   addExpense: 'Add expense',
   addIncome: 'Add income',
   expenses: 'Expenses',

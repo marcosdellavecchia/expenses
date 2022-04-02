@@ -108,7 +108,7 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = () => {
   return (
     <View style={styles.screen}>
       {expenses.length === 0 ? (
-        <EmptyMessage />
+        <EmptyMessage currentMonth={currentMonth} />
       ) : (
         <>
           <View style={styles.balanceContainer}>

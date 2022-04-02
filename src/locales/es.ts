@@ -1,7 +1,8 @@
 export default {
   balance: 'Saldo de {{currentMonth}}',
-  loadFirstExpense: 'Carga tu primer gasto',
-  pressButtonBelow: 'Presiona el botón que se encuentra debajo',
+  loadFirstExpense: 'No hay gastos para {{currentMonth}}',
+  pressButtonBelow:
+    'Carga un gasto o ingreso presionando el botón que se encuentra debajo',
   addExpense: 'Cargar gasto',
   addIncome: 'Cargar ingreso',
   expenses: 'Gastos',
