@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -26,8 +26,6 @@ import { Expense } from '../interfaces';
  */
 
 const SCREEN_WIDTH = Dimensions.get('screen').width;
-const storeDate = getStoreDate();
-const currentMonth = getCurrentMonth();
 
 /*
  * Types
@@ -47,6 +45,13 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = () => {
   });
 
   const [expenses, setExpenses] = useState([]);
+  const [storeDate, setStoreDate] = useState(getStoreDate());
+  const [currentMonth, setCurrentMonth] = useState(getCurrentMonth());
+
+  useEffect(() => {
+    setStoreDate(storeDate);
+    setCurrentMonth(currentMonth);
+  }, [storeDate, currentMonth]);
 
   const getExpenses = () => {
     AsyncStorage.getItem(STORAGE_ITEM_NAME).then(expenses => {

@@ -23,13 +23,6 @@ import { EntryCategory, EntryType } from '../interfaces';
 import { STORAGE_ITEM_NAME } from '../data';
 
 /*
- * Constants
- */
-
-const storeDate = getStoreDate();
-const displayDate = getDisplayDate();
-
-/*
  * Types
  */
 
@@ -44,13 +37,20 @@ interface NewEntryScreenProps {
 const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
   componentId,
 }) => {
+  const [inputValue, setinputValue] = useState('');
+  const [category, setCategory] = useState(entryCategories[0]);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [storeDate, setStoreDate] = useState(getStoreDate());
+  const [displayDate, setDisplayDate] = useState(getDisplayDate());
+
   useEffect(() => {
     getLastSelectedExpenseCategory();
   }, []);
 
-  const [inputValue, setinputValue] = useState('');
-  const [category, setCategory] = useState(entryCategories[0]);
-  const [isModalVisible, setModalVisible] = useState(false);
+  useEffect(() => {
+    setStoreDate(storeDate);
+    setDisplayDate(displayDate);
+  }, [storeDate, displayDate]);
 
   const getLastSelectedExpenseCategory = () => {
     AsyncStorage.getItem(STORAGE_ITEM_NAME).then(expenses => {
