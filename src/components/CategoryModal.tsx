@@ -98,6 +98,10 @@ export const CategoryModal: FunctionComponent<CategoryModalProps> = ({
   );
 };
 
+/*
+ * Styles
+ */
+
 const styles = StyleSheet.create({
   screen: {
     position: 'absolute',

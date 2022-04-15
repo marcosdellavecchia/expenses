@@ -6,9 +6,17 @@ import EmptyBoxSvg from '../assets/images/empty-box.svg';
 import { Colors } from '../theme/colors';
 import { Spacer } from './Spacer';
 
+/*
+ * Types
+ */
+
 interface EmptyMessageProps {
   currentMonth: string;
 }
+
+/*
+ * Empty Message Component
+ */
 
 export const EmptyMessage: FunctionComponent<EmptyMessageProps> = ({
   currentMonth,
@@ -23,6 +31,10 @@ export const EmptyMessage: FunctionComponent<EmptyMessageProps> = ({
     <Text style={styles.body1}>{I18n.t('pressButtonBelow')}</Text>
   </View>
 );
+
+/*
+ * Styles
+ */
 
 const styles = StyleSheet.create({
   screen: {

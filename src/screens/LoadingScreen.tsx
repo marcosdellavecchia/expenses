@@ -2,6 +2,10 @@ import React from 'react';
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { NavigationFunctionComponent } from 'react-native-navigation';
 
+/*
+ * Loading Screen
+ */
+
 const LoadingScreen: NavigationFunctionComponent = () => {
   return (
     <View style={styles.screen}>
@@ -10,6 +14,10 @@ const LoadingScreen: NavigationFunctionComponent = () => {
     </View>
   );
 };
+
+/*
+ * Styles
+ */
 
 const styles = StyleSheet.create({
   screen: {

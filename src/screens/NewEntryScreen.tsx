@@ -7,7 +7,6 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import I18n from '../../i18n';
-import { NumberInput } from '../components/NumberInput';
 import CloseIconSvg from '../assets/images/close-icon.svg';
 import { Colors } from '../theme/colors';
 import {
@@ -16,8 +15,7 @@ import {
   getStoreDate,
   getDisplayDate,
 } from '../utils';
-import { CategoryModal } from '../components/CategoryModal';
-import { Spacer } from '../components/Spacer';
+import { CategoryModal, NumberInput, Spacer } from '../components';
 import { entryCategories } from '../data';
 import { EntryCategory, EntryType } from '../interfaces';
 import { STORAGE_ITEM_NAME } from '../data';
@@ -99,6 +97,10 @@ const NewEntryScreen: NavigationFunctionComponent<NewEntryScreenProps> = ({
     }
     saveValue();
   };
+
+  /*
+   * Styles
+   */
 
   return (
     <View style={styles.screen}>

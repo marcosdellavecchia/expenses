@@ -36,6 +36,10 @@ export const CurrentBalance: FunctionComponent<CurrentBalanceProps> = ({
   );
 };
 
+/*
+ * Styles
+ */
+
 const styles = StyleSheet.create({
   balanceContainer: {
     marginTop: 90,

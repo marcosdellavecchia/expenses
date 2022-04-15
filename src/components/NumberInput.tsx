@@ -3,11 +3,19 @@ import { View, StyleSheet, TextInput } from 'react-native';
 
 import { Colors } from '../theme/colors';
 
+/*
+ * Types
+ */
+
 interface NumberInputProps {
   value: string;
   onValueChange: (text: string) => void;
   onSubmitEditing: () => void;
 }
+
+/*
+ * Number Input Components
+ */
 
 export const NumberInput: FunctionComponent<NumberInputProps> = ({
   value,
@@ -32,6 +40,10 @@ export const NumberInput: FunctionComponent<NumberInputProps> = ({
     </View>
   );
 };
+
+/*
+ * Styles
+ */
 
 const styles = StyleSheet.create({
   screen: {

@@ -11,6 +11,10 @@ export const Separator: FunctionComponent = () => (
   <View style={styles.separator}></View>
 );
 
+/*
+ * Styles
+ */
+
 const styles = StyleSheet.create({
   separator: {
     marginBottom: 5,

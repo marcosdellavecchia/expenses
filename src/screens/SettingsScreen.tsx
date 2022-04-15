@@ -12,7 +12,7 @@ import { NavigationFunctionComponent } from 'react-native-navigation';
 import RNRestart from 'react-native-restart';
 
 import I18n from '../../i18n';
-import { Spacer } from '../components/Spacer';
+import { Spacer } from '../components';
 import { Colors } from '../theme/colors';
 
 /*
@@ -92,6 +92,10 @@ const SettingsScreen: NavigationFunctionComponent<SettingsScreenProps> = ({
     </View>
   );
 };
+
+/*
+ * Styles
+ */
 
 const styles = StyleSheet.create({
   screen: {

@@ -13,10 +13,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigationComponentDidAppear } from 'react-native-navigation-hooks';
 
 import I18n from '../../i18n';
-import { Separator } from '../components/Separator';
 import { Colors } from '../theme/colors';
-import { EmptyMessage } from '../components/EmptyMessage';
-import { CurrentBalance } from '../components/CurrentBalance';
+import { CurrentBalance, EmptyMessage, Separator } from '../components';
 import { formatToCurrency, getStoreDate, getCurrentMonth } from '../utils';
 import { STORAGE_ITEM_NAME } from '../data';
 import { Expense } from '../interfaces';
@@ -132,6 +130,10 @@ const HomeScreen: NavigationFunctionComponent<HomeScreenProps> = () => {
     </View>
   );
 };
+
+/*
+ * Styles
+ */
 
 const styles = StyleSheet.create({
   screen: {

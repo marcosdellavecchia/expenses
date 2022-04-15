@@ -1,5 +1,4 @@
 import { EntryType, EntryCategory } from '../interfaces';
-import I18n from '../../i18n';
 
 export const STORAGE_ITEM_NAME = 'EXPENSES';
 
